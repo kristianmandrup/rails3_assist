@@ -1,0 +1,14 @@
+-----------------------------------------------------
+2010-08-18 13:38:04 +0200 -- setup generator: [basic_generator]
+[BasicGenerator]
+-- By default we are in info mode...
+This is debugging mode!
+-- Back to info mode
+-----------------------------------------------------
+2010-08-18 13:40:00 +0200 -- setup generator: [basic_generator]
+[BasicGenerator]
+-- By default we are in info mode...
+-- debug lv set to: debug
+This is debugging mode!
+-- More info... but still in debugging mode
+-- Back to info mode
