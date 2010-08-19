@@ -38,7 +38,7 @@ module Rails::Assist
       end
 
       def root_dir                                                                                    
-        dir = Rails::Assist::App.rails_root_dir
+        dir = Rails::Assist::App.rails_root_dir || Rails.root
         raise "You must set the Rails app root dir: Rails::Assist::App.root_dir = '/my/root/dir'" if !dir
         dir
       end    

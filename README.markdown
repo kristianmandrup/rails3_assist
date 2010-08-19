@@ -35,12 +35,22 @@ The ORM used is specified by calling <code>use_orm :[orm]</code> fx <code>use_or
 
 ### Usage
 
-Generators are often designed to create Rails 3 artifacts or update existing artifacts. It's often useful to include one or more Rails 3 artifact assisters along
-with a generator assister (see above). 
-This combination greatly facilitates your work in developing the generator, as much of the heavy lifting will be done for you in the assisters.
-To use a helper, simply call:
+### Rails root
 
-*assist_with [list of helpers]*
+You have to set the class variable <code>Rails::Assist::App.rails_root_dir</code> to the location of your Rails root directory if you are using this gem outside of Rails,
+Fx for testing purposes or something. It will default to use <code>Rails.root</code> if this class variable is not set to override it.
+
+In the specs I use the *rails_root_dir* class variable to avoid having to set a Rails app specific variable, which I deemed unnecessary for most of the tests.
+
+### Artifact assistants
+
+Generators are often designed to create Rails 3 artifacts or update existing artifacts. It's often useful to include one or more Rails 3 artifact assistants along
+with a generator assistant (see above). 
+
+This combination greatly facilitates your work in developing the generator, as much of the heavy lifting will be done for you in the assistants.
+To use a specific assistant/helper, simply call:
+
+*assist_with [list of assistant symbols]*
 
 Example:
 
