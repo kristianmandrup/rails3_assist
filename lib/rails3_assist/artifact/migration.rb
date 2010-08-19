@@ -1,9 +1,7 @@
-require 'migration_assist'
-
 module Rails::Assist
   module Migration
     include Rails::Assist::BaseHelper    
-    include Rails::Assist::Generators::Migration::ClassMethods
+    include Rails::Migration::Assist::ClassMethods
 
     include FileName
     
