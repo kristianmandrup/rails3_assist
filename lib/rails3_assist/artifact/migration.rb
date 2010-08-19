@@ -1,5 +1,7 @@
 require 'migration_assist'
 
+Rails::Migration::Assist.root_dir = Rails::Assist::Migration.root_dir
+
 module Rails::Assist
   module Migration
     include Rails::Assist::BaseHelper    
