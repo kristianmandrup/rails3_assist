@@ -1,3 +1,5 @@
+require 'migration_assist'
+
 module Rails::Assist
   module Migration
     include Rails::Assist::BaseHelper    

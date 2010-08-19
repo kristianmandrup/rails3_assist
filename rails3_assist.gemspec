@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails3_assist}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
@@ -47,15 +47,19 @@ Gem::Specification.new do |s|
      "rails3_assist.gemspec",
      "rails_generator.log",
      "spec/load_spec.rb",
-     "spec/rails3-assist/app_spec.rb",
-     "spec/rails3-assist/controller_spec.rb",
-     "spec/rails3-assist/helper_spec.rb",
-     "spec/rails3-assist/mailer_spec.rb",
-     "spec/rails3-assist/migration_spec.rb",
-     "spec/rails3-assist/model_spec.rb",
-     "spec/rails3-assist/observer_spec.rb",
-     "spec/rails3-assist/orm_spec.rb",
-     "spec/rails3-assist/view_spec.rb",
+     "spec/rails3_assist/app/app_dirs_spec.rb",
+     "spec/rails3_assist/app/app_file_names_spec.rb",
+     "spec/rails3_assist/app/app_files_spec.rb",
+     "spec/rails3_assist/artifact/controller/controller_spec.rb",
+     "spec/rails3_assist/artifact/helper/helper_spec.rb",
+     "spec/rails3_assist/artifact/mailer/mailer_spec.rb",
+     "spec/rails3_assist/artifact/migration/migration_spec.rb",
+     "spec/rails3_assist/artifact/model/model_spec.rb",
+     "spec/rails3_assist/artifact/observer/observer_spec.rb",
+     "spec/rails3_assist/artifact/orm/active_record_spec.rb",
+     "spec/rails3_assist/artifact/orm/mongo_mapper_spec.rb",
+     "spec/rails3_assist/artifact/orm/mongoid_spec.rb",
+     "spec/rails3_assist/artifact/view_spec/view_spec.rb",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/kristianmandrup/rails3-assist}
@@ -65,15 +69,19 @@ Gem::Specification.new do |s|
   s.summary = %q{Assist in operating on Rails 3 artifacts including migrations}
   s.test_files = [
     "spec/load_spec.rb",
-     "spec/rails3-assist/app_spec.rb",
-     "spec/rails3-assist/controller_spec.rb",
-     "spec/rails3-assist/helper_spec.rb",
-     "spec/rails3-assist/mailer_spec.rb",
-     "spec/rails3-assist/migration_spec.rb",
-     "spec/rails3-assist/model_spec.rb",
-     "spec/rails3-assist/observer_spec.rb",
-     "spec/rails3-assist/orm_spec.rb",
-     "spec/rails3-assist/view_spec.rb",
+     "spec/rails3_assist/app/app_dirs_spec.rb",
+     "spec/rails3_assist/app/app_file_names_spec.rb",
+     "spec/rails3_assist/app/app_files_spec.rb",
+     "spec/rails3_assist/artifact/controller/controller_spec.rb",
+     "spec/rails3_assist/artifact/helper/helper_spec.rb",
+     "spec/rails3_assist/artifact/mailer/mailer_spec.rb",
+     "spec/rails3_assist/artifact/migration/migration_spec.rb",
+     "spec/rails3_assist/artifact/model/model_spec.rb",
+     "spec/rails3_assist/artifact/observer/observer_spec.rb",
+     "spec/rails3_assist/artifact/orm/active_record_spec.rb",
+     "spec/rails3_assist/artifact/orm/mongo_mapper_spec.rb",
+     "spec/rails3_assist/artifact/orm/mongoid_spec.rb",
+     "spec/rails3_assist/artifact/view_spec/view_spec.rb",
      "spec/spec_helper.rb"
   ]
 
@@ -83,18 +91,15 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 2.0.0.beta.19"])
-      s.add_development_dependency(%q<generator-rspec>, [">= 0.6.0"])
       s.add_runtime_dependency(%q<require_all>, [">= 1.1.0"])
       s.add_runtime_dependency(%q<migration_assist>, [">= 0"])
     else
       s.add_dependency(%q<rspec>, [">= 2.0.0.beta.19"])
-      s.add_dependency(%q<generator-rspec>, [">= 0.6.0"])
       s.add_dependency(%q<require_all>, [">= 1.1.0"])
       s.add_dependency(%q<migration_assist>, [">= 0"])
     end
   else
     s.add_dependency(%q<rspec>, [">= 2.0.0.beta.19"])
-    s.add_dependency(%q<generator-rspec>, [">= 0.6.0"])
     s.add_dependency(%q<require_all>, [">= 1.1.0"])
     s.add_dependency(%q<migration_assist>, [">= 0"])
   end
