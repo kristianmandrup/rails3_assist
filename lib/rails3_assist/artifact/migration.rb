@@ -1,6 +1,6 @@
 require 'migration_assist'
 
-Rails::Migration::Assist.root_dir = Rails::Assist::Migration.root_dir
+Rails::Migration::Assist.rails_root_dir = Rails::Assist::App.rails_root_dir
 
 module Rails::Assist
   module Migration
