@@ -12,7 +12,10 @@ module Rails::Assist
         finder_method = :"find_#{type}"
         found_file = send finder_method, name if respond_to?(finder_method)
         return found_file if found_file
-        # default
+        
+        raise "Existing migration file: #{name} can't be found!" if type == :migration
+          
+        # default for non-migration
         make_file_name(name, type)      
       end
     end

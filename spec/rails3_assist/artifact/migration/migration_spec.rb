@@ -33,16 +33,16 @@ describe 'migration' do
     read_migration(:create_account).should have_comment 'hello'
     puts read_migration(:create_account)
 
-    puts migration_file_name :create_account
+    # puts migration_file_name :create_account
 
-    puts existing_file_name :create_account, :migration
+    # puts existing_file_name :create_account, :migration
 
-    # root_dir.should have_migration :create_account
+    root_dir.should have_migration :create_account
 
-    # root_dir.should have_migration :create_account do |migration_file|
-    #   migration_file.should have_method :index
-    #   migration_file.should have_comment 'hello'
-    #   migration_file.should have_comment 'goodbye'
-    # end
+    root_dir.should have_migration :create_account do |migration_file|
+      migration_file.should have_class_method :up
+      migration_file.should have_comment 'hello'
+      migration_file.should have_comment 'goodbye'
+    end
   end
 end
