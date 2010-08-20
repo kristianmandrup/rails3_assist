@@ -39,7 +39,7 @@ module Rails::Assist::App
   include RailsDirs
 
   # put all FileName modules into App
-  Rails::Assist.artifacts.each do |name|
+  Rails::Assist.helper_list.each do |name|
     class_eval %{
       include Rails::Assist::#{name.to_s.camelize}::FileName
     } 

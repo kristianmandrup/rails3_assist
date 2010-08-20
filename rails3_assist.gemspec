@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2010-08-19}
+  s.date = %q{2010-08-20}
   s.description = %q{Assist in operating on Rails 3 artifacts including migrations}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
@@ -59,7 +59,8 @@ Gem::Specification.new do |s|
      "spec/rails3_assist/artifact/orm/active_record_spec.rb",
      "spec/rails3_assist/artifact/orm/mongo_mapper_spec.rb",
      "spec/rails3_assist/artifact/orm/mongoid_spec.rb",
-     "spec/rails3_assist/artifact/view_spec/view_spec.rb",
+     "spec/rails3_assist/artifact/view_spec/view_controller_action_spec.rb",
+     "spec/rails3_assist/artifact/view_spec/view_controller_default_action_specc.rb",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/kristianmandrup/rails3-assist}
@@ -81,7 +82,8 @@ Gem::Specification.new do |s|
      "spec/rails3_assist/artifact/orm/active_record_spec.rb",
      "spec/rails3_assist/artifact/orm/mongo_mapper_spec.rb",
      "spec/rails3_assist/artifact/orm/mongoid_spec.rb",
-     "spec/rails3_assist/artifact/view_spec/view_spec.rb",
+     "spec/rails3_assist/artifact/view_spec/view_controller_action_spec.rb",
+     "spec/rails3_assist/artifact/view_spec/view_controller_default_action_specc.rb",
      "spec/spec_helper.rb"
   ]
 
