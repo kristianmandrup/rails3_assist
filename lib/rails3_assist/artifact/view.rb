@@ -63,9 +63,7 @@ module Rails::Assist
       when Hash
         args.first[:content]
       end
-    end
-    
-    include FileName
+    end    
 
     aliases_for :view 
   end

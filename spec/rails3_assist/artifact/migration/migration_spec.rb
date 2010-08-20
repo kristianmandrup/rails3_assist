@@ -1,11 +1,10 @@
 require 'spec_helper'
-require 'rails-app-spec'
 
 Rails::Migration::Assist.orm = :active_record
 
 describe 'migration' do 
   use_orm :active_record
-  use_helpers :app, :migration
+  use_helpers :migration
 
   before :each do              
     remove_migration :create_account        
@@ -38,6 +37,8 @@ describe 'migration' do
     # puts existing_file_name :create_account, :migration
 
     root_dir.should have_migration :create_account
+
+    lambda {existing_migration_file :blip}.should raise_error
 
     root_dir.should have_migration :create_account do |migration_file|
       migration_file.should have_class_method :up

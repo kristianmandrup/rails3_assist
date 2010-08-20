@@ -6,7 +6,5 @@ module Rails::Assist
   module Migration
     include Rails::Assist::BaseHelper    
     include Rails::Migration::Assist::ClassMethods
-
-    include FileName    
   end
 end

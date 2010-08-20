@@ -2,10 +2,8 @@ require 'rspec'
 require 'rspec/autorun'     
 # require 'generator_spec'
 require 'rails3_assist'
+require 'rails-app-spec'
 require 'tmpdir'
-require 'file-spec'
-require 'code-spec'
-# require 'rails3_app_spec'                       
 
 # RSpec::Generator.configure do |config|
 #   config.debug = false

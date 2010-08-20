@@ -28,12 +28,22 @@ module Rails::Assist
         end      
         [action, type, args]
       end
-    end
+    end 
+    
+    include FileName
   end
 
   module Migration
     module FileName   
       include Rails::Migration::Assist::ClassMethods      
+
+      class FindError
+        attr_accessor :find_expr
+        
+        def initialize find_expr
+          self.find_expr = find_expr
+        end
+      end
       
       def migration_file_name name, options={}
         number = options[:number]      
@@ -42,13 +52,25 @@ module Rails::Assist
       end
             
       def find_migration name, option=nil
-        migrations = Dir.glob("#{migration_dir}/[0-9]*_*.rb")
-        return nil if migrations.empty?      
-        matching_migrations = migrations.grep(/\d+_#{name}\.rb$/)
-        return nil if matching_migrations.empty?
+        migration_find_expr = "#{migration_dir}/[0-9]*_*.rb"
+        migrations = Dir.glob(migration_find_expr)
+        
+        find_err = FindError.new migration_find_expr
+        
+        return find_err if migrations.empty?  
+        
+        migration_find_expr = /\d+_#{name}\.rb$/
+        find_err.find_expr = migration_find_expr
+            
+        matching_migrations = migrations.grep(migration_find_expr)
+
+        return find_err if matching_migrations.empty?
+
         migration_file = (option == :last) ? matching_migrations.last : matching_migrations.first
       end      
     end
+    
+    include FileName 
   end 
   
   (Rails::Assist.artifacts. - [:migration, :view]).each do |name|

@@ -11,12 +11,16 @@ module Rails::Assist
         # first try finder method
         finder_method = :"find_#{type}"       
         if respond_to?(finder_method)          
-          found_file = send finder_method, name 
-          return found_file if found_file
-          raise "The call to #finder_#{type}(#{name}) didn't find an existing #{type} file"
-        end        
-
-        raise "The method #finder_#{type} to find the migration is not available!" if type == :migration          
+          result = send finder_method, name 
+          if !result.kind_of? String          
+            raise "The call to #find_#{type}(#{name}) didn't find an existing #{type} file. Error in find expression: #{result.find_expr}" 
+          end
+          return result
+        else
+          raise "The method #find_#{type} to find the migration is not available!" if type == :migration          
+        end
+        
+        # puts "Using method #make_file_name(#{name}) for #{type || 'unknown'}"
 
         # default for non-migration
         make_file_name(name, type)      
@@ -29,7 +33,7 @@ module Rails::Assist
           end
         } 
       end
-    end
+    end  # file_name
     
     include FileName
   end    

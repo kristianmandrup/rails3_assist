@@ -5,7 +5,7 @@ module Rails::Assist
       type = get_type(options)
       file = existing_file_name(name, type)
       raise "No file could be determined: #{file} from name: #{name} of type: #{type}" if !file      
-      raise "File to insert in not found: #{file}" if !File.file?(file)
+      raise "File to insert in not found: #{file} for #{type}" if !File.file?(file)
 
       x_marker = marker(name, type, options)
       
