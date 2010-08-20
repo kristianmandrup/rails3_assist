@@ -2,8 +2,10 @@ module Rails::Assist
   module View
     module FileName    
       def view_file_name folder, action=nil, type=nil
-        File.join(view_dir, folder.to_s, "#{get_action action}.#{get_type type}")
-      end        
+        action = get_action(action)                
+        type = get_type(type)
+        File.expand_path File.join(view_dir, folder.to_s, "#{action}.#{type}")
+      end
     end
   end
 

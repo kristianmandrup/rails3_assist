@@ -14,7 +14,7 @@ module Rails::Assist
       case options
       when Hash
         raise ArgumentError, "No artifact type specified #{options}" if !options[:type]
-        options[:type]
+        options[:type].to_sym
       when String, Symbol
         options.to_sym
       else

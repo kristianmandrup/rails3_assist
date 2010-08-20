@@ -35,6 +35,8 @@ The ORM used is specified by calling <code>use_orm :[orm]</code> fx <code>use_or
 
 ### Usage
 
+Set the root if not already set, then use the special assist/use methods to draw in the modules with all the goodies!
+
 ### Rails root
 
 You have to set the class variable <code>Rails::Assist::App.rails_root_dir</code> to the location of your Rails root directory if you are using this gem outside of Rails,
@@ -57,6 +59,11 @@ Example:
 <code>assist_with :app, :controller, :model, :view</code>
 
 Aliases: *use_helpers* and *use_helper*
+
+## Known issues
+
+* View generation fails when action arg supplied :( To be fixed ASAP
+ - rails3_assist/artifact/view.rb:7:in `[]' can't convert Symbol into Integer
 
 ## Note on Patches/Pull Requests
  
