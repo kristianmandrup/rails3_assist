@@ -40,6 +40,16 @@ module Rails::Assist
         number = next_migration_number(migration_dir) if !number      
         File.join(migration_dir, "#{number}_#{name}.rb")      
       end
+            
+      def find_migration name, option=nil
+        migrations = Dir.glob("#{migration_dir}/[0-9]*_*.rb")
+        return nil if migrations.empty?      
+        matching_migrations = migrations.grep(/\d+_#{name}\.rb$/)
+        return nil if matching_migrations.empty?
+        migration_file = (option == :last) ? matching_migrations.last : matching_migrations.first
+        # puts "migration_file: #{migration_file}"
+        migration_file
+      end      
     end
   end 
   

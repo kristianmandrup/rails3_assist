@@ -22,6 +22,12 @@ module Rails::Assist
       "#{name.to_s.camelize}Observer < ActiveRecord::Observer"
     end
   end
+
+  module Migration
+    def migration_marker name, options=nil
+      "#{name.to_s.camelize} < ActiveRecord::Migration"
+    end    
+  end
   
   module Model   
     include Rails::Assist::BaseHelper    
