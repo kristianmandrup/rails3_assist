@@ -4,9 +4,8 @@ module Rails::Assist
     
     # CREATE
     def create_view name, *args, &block
-      action, type, args = get_view_args(args)
-      file = view_file_name(name, action, type)
-      dir = File.dirname(file)
+      file_name = view_file_name(name, args)      
+      dir = File.dirname(file_name)
       FileUtils.mkdir_p dir if !File.directory?(dir)
 
       content = get_content(args) || yield if block
@@ -15,17 +14,16 @@ module Rails::Assist
       debug "Warning: Content must be passed in either as a :content hash or a block" if !content
       return nil if !content
 
-      debug "Writing view file: #{file}"      
+      debug "Writing view file: #{file_name}"
       # write file content of view
-      File.open(file, 'w') do |f|  
+      File.open(file_name, 'w') do |f|  
         f.puts content 
       end
     end  
 
     # READ
     def read_view(name, *args, &block)
-      action, type, args = get_view_args(args)      
-      file_name = view_file_name(name, action, type)
+      file_name = view_file_name(name, args)
       debug "reading from: #{file_name}"
       file = File.new(file_name)
       raise "The view file: #{file} could not be found" if !file
@@ -39,18 +37,18 @@ module Rails::Assist
       end
     end
     
-
     # UPDATE
     def insert_into_view(name, *args, &block)
-      action, type, args = get_view_args(args)
-      file = view_file_name(name, action, type)
-      debug "file insertion (view): #{file}"
-      
-      options = args.first.kind_of?(Hash) ? args.first : {}      
+      arguments = args.clone  
+      action, type, args = get_view_args(args)            
+      file_name = view_file_name(name, arguments)
+      debug "file insertion (view): #{file_name}"
+
+      options = args.first.kind_of?(Hash) ? args.first : {}            
       marker = options[:before] || options[:after]
 
       raise ArgumentError, ":before or :after option must be specified for insertion" if !marker      
-      file_insertion(file, marker, options, &block)
+      file_insertion(file_name, marker, options, &block)
     end
 
     # DELETE
@@ -65,31 +63,6 @@ module Rails::Assist
       when Hash
         args.first[:content]
       end
-    end
-
-    def get_view_args args 
-      args = args.flatten
-      case args.first
-      when Hash
-        action = args.first.delete(:action)
-        type = args.first.delete(:type)
-      when String, Symbol
-        action = args.delete_at(0)
-      end
-      case args.first
-      when String, Symbol        
-        type = args.delete_at(0)
-      end      
-      [action, type, args]
-    end
-
-
-    def get_action action
-      (action || 'show').to_s
-    end
-
-    def get_type type
-      type || 'html.erb'
     end
     
     include FileName
