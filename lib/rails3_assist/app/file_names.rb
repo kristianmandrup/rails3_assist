@@ -47,8 +47,6 @@ module Rails::Assist
         matching_migrations = migrations.grep(/\d+_#{name}\.rb$/)
         return nil if matching_migrations.empty?
         migration_file = (option == :last) ? matching_migrations.last : matching_migrations.first
-        # puts "migration_file: #{migration_file}"
-        migration_file
       end      
     end
   end 
