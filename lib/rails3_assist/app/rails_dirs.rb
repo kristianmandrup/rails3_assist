@@ -37,68 +37,69 @@ module Rails::Assist
         rails_containers.include?(type)
       end
 
-      def root_dir                                                                                    
-        dir = Rails::Assist::App.rails_root_dir || Rails.root
+      def root_dir options={}                                                                                    
+        dir = options[:root_path] if options
+        dir ||= Rails::Assist::App.rails_root_dir || Rails.root
         raise "You must set the Rails app root dir: Rails::Assist::App.root_dir = '/my/root/dir'" if !dir
         dir
       end    
 
-      def rails_dir_for type
+      def rails_dir_for type, options={}
         raise ArgumentError, '#rails_dir_for takes a dir type argument' if !type
         dir_method = "#{type}_dir"
-        self.send(dir_method) if respond_to?(dir_method)
+        self.send(dir_method, options) if respond_to?(dir_method)
       end
     
-      def migration_dir
-        File.join(db_dir, 'migrations')
+      def migration_dir options={}
+        File.join(db_dir(options), 'migrations')
       end
 
-      def config_dir_for type
-        File.join(config_dir, type.to_s)
+      def config_dir_for type, options={}
+        File.join(config_dir(options), type.to_s)
       end      
 
-      def initializer_dir
-        config_dir_for type :initializers
+      def initializer_dir options={}
+        config_dir_for type :initializers, options
       end  
 
-      def locale_dir
-        config_dir_for type :locales
+      def locale_dir options={}
+        config_dir_for type :locales, options
       end
 
-      def public_dir_for type
-        File.join(public_dir, type.to_s)
+      def public_dir_for type, options={}
+        File.join(public_dir(options), type.to_s)
       end      
 
-      def stylesheet_dir
-        public_dir_for :stylesheets
+      def stylesheet_dir options={}
+        public_dir_for :stylesheets, options
       end
 
-      def javascript_dir
-        public_dir_for :javascripts
+      def javascript_dir options={}
+        public_dir_for :javascripts, options
       end
          
       root_directories.each do |name|
         class_eval %{
-          def #{name}_dir
-            File.join(root_dir, '#{name}')
+          def #{name}_dir options={}
+            File.join(root_dir(options), '#{name}')
           end        
         } 
       end
 
       app_artifacts.each do |name|
         class_eval %{
-          def #{name}_dir      
-            File.join(app_dir, '#{name}')
+          def #{name}_dir options={}
+            File.join(app_dir(options), '#{name}')
           end
         } 
       end    
 
-      def app_dir
-        File.join(root_dir, 'app')
+      def app_dir options={}
+        File.join(root_dir(options), 'app')
       end        
 
-      def observer_dir
-        model_dir
+      def observer_dir options={}
+        model_dir options
       end
     end # RailsDirs   
   end # App

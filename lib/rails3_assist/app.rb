@@ -4,8 +4,8 @@ module Rails::Assist
   end
 
   module ArtifactPath
-    def artifact_path name, type, dir=nil
-      dir ||= send :"#{type}_dir"
+    def artifact_path name, type, options={}
+      dir = send :"#{type}_dir", options[:root_path] 
       File.join(dir, "#{name}#{type_postfix type}.rb")
     end
 

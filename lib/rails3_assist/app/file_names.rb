@@ -47,12 +47,19 @@ module Rails::Assist
       
       def migration_file_name name, options={}
         number = options[:number]      
-        number = next_migration_number(migration_dir) if !number      
+        
+        migration_dir_name = File.expand_path(migration_dir options[:root_path])
+                
+        number = next_migration_number(migration_dir_name) if !number      
         File.join(migration_dir, "#{number}_#{name}.rb")      
       end
             
-      def find_migration name, option=nil
-        migration_find_expr = "#{migration_dir}/[0-9]*_*.rb"
+      def find_migration name, options={}
+        root_path = options[:root_path]        
+             
+        migration_dir_name = File.expand_path(migration_dir options[:root_path])
+
+        migration_find_expr = "#{migration_dir_name}/[0-9]*_*.rb"
         migrations = Dir.glob(migration_find_expr)
         
         find_err = FindError.new migration_find_expr
@@ -66,7 +73,7 @@ module Rails::Assist
 
         return find_err if matching_migrations.empty?
 
-        migration_file = (option == :last) ? matching_migrations.last : matching_migrations.first
+        migration_file = (options[:last]) ? matching_migrations.last : matching_migrations.first
       end      
     end
     
@@ -79,7 +86,7 @@ module Rails::Assist
         module FileName
         
           def #{name}_file_name name, options=nil
-            artifact_path name, :#{name}
+            artifact_path name, :#{name}, options
           end        
         end
         

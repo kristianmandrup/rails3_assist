@@ -35,7 +35,7 @@ Rails::Assist::App.rails_root_dir = temp_dir('tmp_rails')
 
 RSpec.configure do |config|
   config.after do
-    remove_temp_dir 'tmp_rails'
+    # remove_temp_dir 'tmp_rails'
   end
 end
 
