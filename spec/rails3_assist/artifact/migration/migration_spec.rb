@@ -1,6 +1,10 @@
 require 'spec_helper'
+require 'rails-app-spec'
 
-describe 'migration' do
+Rails::Migration::Assist.orm = :active_record
+
+describe 'migration' do 
+  use_orm :active_record
   use_helpers :app, :migration
 
   before :each do              
@@ -8,7 +12,10 @@ describe 'migration' do
     
     create_migration :create_account do
       %q{
-        def index
+        def self.up
+        end
+
+        def self.down
         end
       }
     end    

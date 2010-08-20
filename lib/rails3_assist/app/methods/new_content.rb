@@ -1,5 +1,5 @@
 module Rails::Assist
-  (artifacts - [:migration, :model]).each do |name|
+  (artifacts - [:model]).each do |name|
     class_eval %{
       module #{name.to_s.camelize}
         def new_#{name}_content name, content=nil, &block

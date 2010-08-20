@@ -1,3 +1,5 @@
+require 'migration_assist'
+
 module Rails::Assist
   module View
     module FileName    
@@ -10,7 +12,9 @@ module Rails::Assist
   end
 
   module Migration
-    module FileName
+    module FileName   
+      include Rails::Migration::Assist::ClassMethods      
+      
       def migration_file_name name, options={}
         number = options[:number]      
         number = next_migration_number(migration_dir) if !number      

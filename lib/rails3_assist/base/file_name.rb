@@ -9,9 +9,11 @@ module Rails::Assist
     def existing_file_name name, type 
       # first try finder method
       finder_method = :"find_#{type}"
-      found = send finder_method, name if respond_to? finder_method      
+      found_file = send finder_method, name if respond_to?(finder_method)
+      puts "found file: #{found_file}"
+      return found_file if found_file
       # default
-      make_file_name(name, type) if !found
+      make_file_name(name, type)      
     end
   end
 end
