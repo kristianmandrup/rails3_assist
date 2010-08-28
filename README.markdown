@@ -61,10 +61,9 @@ Example:
 
 Aliases: *use_helpers* and *use_helper*
 
-## Known issues
+## TODO
 
-* View generation fails when action arg supplied :( To be fixed ASAP
- - rails3_assist/artifact/view.rb:7:in `[]' can't convert Symbol into Integer
+Refactor: split it up into smaller gems and modules to be loaded individually as the need arises.
 
 ## Note on Patches/Pull Requests
  

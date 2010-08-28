@@ -23,8 +23,7 @@ module Rails::Assist
         FileUtils.mkdir_p dir
       end
     end                              
-  end 
-  
+  end  
 end
 
 # first load all base modules that the app helper will build upon
@@ -34,10 +33,7 @@ require 'rails3_assist/base'
 require_all File.dirname(__FILE__) + '/app'
 
 # into App
-module Rails::Assist::App  
-  include RailsFiles       
-  include RailsDirs
-
+module Rails::Assist::App
   # put all FileName modules into App
   Rails::Assist.helper_list.each do |name|
     class_eval %{
