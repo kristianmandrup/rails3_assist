@@ -10,6 +10,12 @@ module Rails::Assist
       "#{name.to_s.camelize}Helper"
     end
   end
+
+  module Permit
+    def permit_marker name, options=nil
+      "#{name.to_s.camelize}"
+    end
+  end
   
   module Mailer
     def mailer_marker name, options=nil

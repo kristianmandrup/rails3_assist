@@ -1,6 +1,12 @@
 module Rails::Assist
   module App
     module RailsFiles
+
+      def application_file
+      end
+      
+      def environment_file
+      end
     
       def files_from expr, *types
         types.inject([]) {|files, type| files + self.send(:"#{type}_files", expr)}
@@ -36,7 +42,8 @@ module Rails::Assist
         }
       end
     
-      [:mailer, :observer].each do |name|
+      # artifact files using xxx_[artifact].rb convention, i.e postfixing with type of artifact
+      [:mailer, :observer, :permit].each do |name|
         class_eval %{
           def #{name}_files expr=nil
             files = rails_app_files(:#{name.to_s.pluralize}, '**/*_#{name}.rb').grep expr
@@ -64,7 +71,7 @@ module Rails::Assist
         }
       end
 
-      [:initializer, :db, :migration].each do |name|
+      [:initializer, :db, :migration].each do |name|        
         class_eval %{
           def #{name}_files expr=nil
             files = rails_files(#{name}_dir).grep expr
@@ -88,6 +95,29 @@ module Rails::Assist
             files = rails_files(stylesheet_dir, '**/*.#{ext}').grep expr
             yield files if block_given?                    
           end
+        }
+      end
+
+      [:initializer, :db, :migration, :locale, :javascript, :stylesheet] do |name|
+        plural_name = name.to_s.pluralize
+
+        class_eval %{      
+          def #{name}_file name
+            File.join(#{name}_dir, name)
+          end  
+      
+          def create_#{name} name, &block
+            File.overwrite #{name}_file(name) do
+              yield
+            end
+          end                      
+      
+          def remove_#{plural_name} *names
+            names.each do |name|
+              File.delete #{name}_file(name)
+            end
+          end
+          alias_method :remove_#{name}, :remove_#{plural_name} 
         }
       end
 

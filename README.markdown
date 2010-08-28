@@ -24,6 +24,7 @@ Rails 3 artifacts that have a CRUD assistant:
 * model (insert bug!)
 * observer
 * view
+* permit (NEW - used with cancan)
 
 ## Model
 

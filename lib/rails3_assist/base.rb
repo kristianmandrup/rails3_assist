@@ -39,9 +39,9 @@ module Rails::Assist
       ''
     end
 
-    def marker name, type, options={}      
-      return send :"#{type}_marker", name, options if type
-      name.to_s.camelize
+    def marker_option name, type, options={}      
+      marker_content = type ? send(:"#{type}_marker", name, options) : name.to_s.camelize
+      options[:before] ? {:before => marker_content} : {:after => marker_content}      
     end
   end
 end   

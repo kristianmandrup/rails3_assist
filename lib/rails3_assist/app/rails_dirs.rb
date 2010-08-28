@@ -14,7 +14,7 @@ module Rails::Assist
       end
 
       def self.app_artifacts
-        [:controller, :mailer, :helper, :view, :model]
+        [:controller, :mailer, :helper, :view, :model, :permit]
       end
     
       def self.app_directories

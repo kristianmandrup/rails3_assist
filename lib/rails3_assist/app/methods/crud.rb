@@ -26,6 +26,6 @@ module Rails::Assist
         
         aliases_for :#{name}            
       end
-    }    
-  end
+    }
+  end    
 end

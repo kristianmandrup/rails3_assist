@@ -16,14 +16,13 @@ module Rails::Assist
             raise "The call to #find_#{type}(#{name}) didn't find an existing #{type} file. Error in find expression: #{result.find_expr}" 
           end
           return result
-        else
-          raise "The method #find_#{type} to find the migration is not available!" if type == :migration          
+        elsif type == :migration
+          raise "The method #find_#{type} to find the migration is not available!"
         end
         
-        # puts "Using method #make_file_name(#{name}) for #{type || 'unknown'}"
-
         # default for non-migration
-        make_file_name(name, type)      
+        file_name = make_file_name(name, type)      
+        raise "No file for ##{type} found at location: #{file_name}" if !File.file?(file_name)
       end
 
       Rails::Assist.artifacts.each do |name|
