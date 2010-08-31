@@ -1,13 +1,19 @@
+require 'rake'
+require 'rails3_assist/directory'
 require_all File.dirname(__FILE__) + '/files'
 
 module Rails3::Assist
   module Files         
-    # in order to resolve any files 
     # we depend on the Directories module doing some of the hard work!
-    include Directories    
+
+    def rails_app_files type=nil, file_pattern='**/*.rb'
+      dir = Rails3::Assist::Artifact::Directory.send "#{type.to_s.singularize}_dir"
+      pattern = "#{dir}/#{file_pattern}"
+      FileList[pattern].to_a
+    end
     
     def all_files expr=nil
-      rails_files(root_dir).grep expr
+      rails_files(Rails3::Assist::Directory::Root.root_dir).grep expr
     end  
 
     def app_files expr=nil
@@ -51,11 +57,6 @@ module Rails3::Assist
           yield files if block_given?                    
         end
       }
-    end
-
-    protected
- 
-    include Helpers
-    
+    end    
   end # Files    
 end # App                  

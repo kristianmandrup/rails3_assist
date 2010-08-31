@@ -1,6 +1,6 @@
 module Rails3::Assist::App
   module File
-    [:initializer, :db, :migration, :locale, :javascript, :stylesheet] do |name|
+    [:initializer, :db, :migration, :locale, :javascript, :stylesheet].each do |name|
       plural_name = name.to_s.pluralize
 
       class_eval %{      
