@@ -1,6 +1,6 @@
 require_all File.dirname(__FILE__) + '/files'
 
-module Rails::Assist::App
+module Rails3::Assist
   module Files         
     # in order to resolve any files 
     # we depend on the Directories module doing some of the hard work!

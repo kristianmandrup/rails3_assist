@@ -1,4 +1,4 @@
-module Rails::Assist::App
+module Rails3::Assist::App
   module File
     [:initializer, :db, :migration, :locale, :javascript, :stylesheet] do |name|
       plural_name = name.to_s.pluralize

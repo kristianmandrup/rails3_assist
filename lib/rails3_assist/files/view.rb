@@ -1,4 +1,4 @@
-module Rails::Assist::App::Files
+module Rails3::Assist::App::Files
   module View
     def view_files *args 
       expr, model_name = get_view_args args

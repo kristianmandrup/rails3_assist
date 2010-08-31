@@ -1,27 +1,22 @@
-module Rails::Assist::Directories
-  module Artifacts      
-    def self.app_artifacts
-      [:controller, :mailer, :helper, :view, :model, :permit]
-    end
+require 'rails3_assist/directory/app'
 
-    def app_artifacts
-      Rails::Assist::App::RailsDirs.app_artifacts
-    end
-
+module Rails3::Assist::Artifact
+  module Directory  
+    include Rails3::Assist::Directory::App
     # :controller, :mailer, :helper, :view, :model, :permit
     #
     # controller_dir, mailer_dir ...
-    app_artifacts.each do |name|
+    Rails3::Assist::Artifact.app_artifacts.each do |name|
       class_eval %{
         def #{name}_dir options={}
-          File.join(app_dir(options), '#{name}')
+          File.join(app_dir(options), '#{name.to_s.pluralize}')
         end
       } 
     end    
-    
+  
     # initializer_dir, locale_dir
     # stylesheet_dir, javascript_dir    
-    [:config => [:initializer, :locale], :public => [:stylesheet, :javascript] ].each_pair do |container, names|
+    {:config => [:initializer, :locale], :public => [:stylesheet, :javascript]}.each_pair do |container, names|
       names.each do |name|
         class_eval %{      
           def #{name}_dir options={}
@@ -34,10 +29,10 @@ module Rails::Assist::Directories
     # :app, :config, :db, :public, :lib, :log, :doc, :test, :spec
     #
     # app_dir, config_dir ...
-    root_directories.each do |name|
+    Rails3::Assist::Directory::Root.root_directories.each do |name|
       class_eval %{
         def #{name}_dir options={}
-          File.join(root_dir(options), '#{name}')
+          File.join(Rails3::Assist::Directory::Root.root_dir(options), '#{name}')
         end        
       } 
     end

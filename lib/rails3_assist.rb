@@ -4,7 +4,7 @@ require 'active_support/inflector'
 require 'sugar-high/alias'
 require 'rails3_assist/namespaces'
 
-module Rails::Assist
+module Rails3::Assist
   def self.artifacts
     [:observer, :controller, :helper, :mailer, :model, :migration, :permit]
   end  

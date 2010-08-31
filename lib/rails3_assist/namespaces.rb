@@ -1,6 +1,6 @@
 require 'sugar-high/module'
 
-module Rails
+module Rails3
   module Assist
     modules :app
   end

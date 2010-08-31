@@ -1,4 +1,4 @@
-module Rails::Assist::App::Files
+module Rails3::Assist::App::Files
   module Special
     module Seed
       def seed_file

@@ -1,4 +1,4 @@
-module Rails::Assist::App::Files
+module Rails3::Assist::App::Files
   module Special
     module Environment
       def insert_before_application_init content=nil, &block

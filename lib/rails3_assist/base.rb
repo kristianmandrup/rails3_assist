@@ -1,9 +1,9 @@
-module Rails::Assist
+module Rails3::Assist
   module BaseHelper
     def self.included(base)
       base.extend ClassMethods
       base.class_eval do
-        include Rails::Assist::App
+        include Rails3::Assist::App
         include ::Thor::Actions
       end
     end
@@ -23,7 +23,7 @@ module Rails::Assist
     end
     
     def debug?      
-      Rails::Assist.debug_on
+      Rails3::Assist.debug_on
     end    
 
     def debug msg

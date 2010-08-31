@@ -2,6 +2,13 @@
 
 Includes various helpers to assist operating on a Rails 3 application, including various Rails 3 artifacts, such as migrations etc.
 
+## Development status
+
+TODO specs: artifact
+
+* files
+* directory
+
 ## Rails Artifacts
 
 Rails assist also includes various artifact libraries to help operate on different Rails 3 artifacts. 

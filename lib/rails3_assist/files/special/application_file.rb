@@ -1,4 +1,4 @@
-module Rails::Assist::App::Files
+module Rails3::Assist::App::Files
   module Special
     module Application
       def insert_application_config content=nil, &block
