@@ -1,5 +1,5 @@
 require_all File.dirname(__FILE__) + '/directory'
-require 'rails3_assist/artifact'
+require 'rails3_assist/artifact/directory'
 
 module Rails3::Assist
   module Directory      
@@ -10,12 +10,13 @@ module Rails3::Assist
     include Root
     include App
     include Container    
-    include Rails3::Assist::Artifact::Directory
-    
+        
     # dir_for helpers
     # -------------------
 
     module Methods   
+      DIR = Rails3::Assist::Artifact::Directory      
+      
       # :app, :config, :db, :public, :lib, :log, :doc, :test, :spec
       #
       # app_dir, config_dir ...
@@ -30,7 +31,8 @@ module Rails3::Assist
       def rails_dir_for type, options={}
         raise ArgumentError, '#rails_dir_for takes a dir type argument' if !type
         dir_method = "#{type}_dir"
-        self.send(dir_method, options) if respond_to?(dir_method)
+        return send(dir_method, options) if respond_to?(dir_method)
+        DIR.send(dir_method, options) if DIR.respond_to?(dir_method)
       end
 
       def app_dir_for type, options={}
@@ -51,5 +53,3 @@ module Rails3::Assist
     
   end # Directories   
 end
-
-require 'rails3_assist/artifact'

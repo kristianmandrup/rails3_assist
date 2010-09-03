@@ -1,16 +1,19 @@
-require 'rails3_assist/directory/app'
+require 'rails3_assist/directory'
+require 'rails3_assist/artifact'
 
 module Rails3::Assist::Artifact
   module Directory
     module Methods
-      include Rails3::Assist::Directory::App
+      DIR = Rails3::Assist::Directory
+      APP_DIR = Rails3::Assist::Directory::App
+      
       # :controller, :mailer, :helper, :view, :model, :permit
       #
       # controller_dir, mailer_dir ...
       Rails3::Assist::Artifact.app_artifacts.each do |name|
         class_eval %{
           def #{name}_dir options={}
-            File.join(app_dir(options), '#{name.to_s.pluralize}')
+            File.join(APP_DIR.app_dir(options), '#{name.to_s.pluralize}')
           end
         } 
       end    
@@ -28,7 +31,7 @@ module Rails3::Assist::Artifact
       end
 
       def migration_dir options={}
-        File.join(db_dir(options), 'migrations')
+        File.join(DIR.db_dir(options), 'migrations')
       end
 
       def observer_dir options={}

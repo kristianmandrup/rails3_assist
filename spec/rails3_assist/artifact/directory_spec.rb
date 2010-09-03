@@ -3,7 +3,7 @@ require 'rspec/autorun'
 
 require 'require_all'
 require 'rails3_assist/namespaces'
-require 'rails3_assist/directory'
+require 'rails3_assist/artifact/directory'
 
 CLASS = Rails3::Assist::Artifact::Directory
 
@@ -29,6 +29,22 @@ describe Rails3::Assist::Artifact::Directory do
       end
     } 
   end
+
+  describe '#observer_dir' do
+    it "should return observer directory name" do
+      CLASS.observer_dir.should match /app\/models/
+      @test.observer_dir.should match /app\/models/
+    end
+  end
+
+  describe '#migration_dir' do
+    it "should return migration directory name" do
+      CLASS.migration_dir.should match /db\/migration/
+      @test.migration_dir.should match /db\/migration/
+    end
+  end
+
+
     
   [:initializer, :locale].each do |name|
     eval %{
