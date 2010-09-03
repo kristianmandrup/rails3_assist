@@ -1,7 +1,7 @@
 require 'rake'
 require 'rails3_assist/directory'
 require 'sugar-high/regexp'
-require_all File.dirname(__FILE__) + '/files'
+require_all File.dirname(__FILE__) + '/file'
 
 module Rails3::Assist
   module Files         

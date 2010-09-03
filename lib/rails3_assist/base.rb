@@ -45,5 +45,3 @@ module Rails3::Assist
     end
   end
 end   
-
-require_all File.dirname(__FILE__) + '/base'

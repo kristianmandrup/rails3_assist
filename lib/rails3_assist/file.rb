@@ -34,4 +34,5 @@ module Rails3::Assist
     include Methods
     extend Methods
   end
-end
+end   
+

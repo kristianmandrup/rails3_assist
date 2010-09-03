@@ -15,6 +15,11 @@ module Rails3::Assist
 end
 
 require 'rails3_assist/rspec/macro'
-require 'rails3_assist/app'
 
+require 'rails3_assist/app'                           
+require 'rails3_assist/base'
+require 'rails3_assist/directory'
+require 'rails3_assist/file'
+require 'rails3_assist/files'
+require 'rails3_assist/artifact'
 
