@@ -21,21 +21,10 @@ module Rails3::Assist::Artifact
         names.each do |name|
           class_eval %{      
             def #{name}_dir options={}
-              #{container}_dir_for type :#{name.to_s.pluralize}, options
+              Rails3::Assist::Directory.#{container}_dir_for :#{name.to_s.pluralize}, options
             end  
           }
         end
-      end
-
-      # :app, :config, :db, :public, :lib, :log, :doc, :test, :spec
-      #
-      # app_dir, config_dir ...
-      Rails3::Assist::Directory::Root.root_directories.each do |name|
-        class_eval %{
-          def #{name}_dir options={}
-            File.join(Rails3::Assist::Directory::Root.root_dir(options), '#{name}')
-          end        
-        } 
       end
 
       def migration_dir options={}

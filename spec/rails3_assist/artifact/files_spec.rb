@@ -2,7 +2,6 @@ require 'rspec'
 require 'rspec/autorun'     
 
 require 'fixtures'
-
 require 'sugar-high/file'
 
 require 'require_all'

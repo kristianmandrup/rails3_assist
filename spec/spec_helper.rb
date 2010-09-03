@@ -1,6 +1,6 @@
 require 'rspec'
 require 'rspec/autorun'     
-# require 'rails3_assist'
+require 'rails3_assist'
 # require 'rails-app-spec'
 require 'tmpdir'
 

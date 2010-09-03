@@ -15,23 +15,40 @@ module Rails3::Assist
     # dir_for helpers
     # -------------------
 
-    def rails_dir_for type, options={}
-      raise ArgumentError, '#rails_dir_for takes a dir type argument' if !type
-      dir_method = "#{type}_dir"
-      self.send(dir_method, options) if respond_to?(dir_method)
+    module Methods   
+      # :app, :config, :db, :public, :lib, :log, :doc, :test, :spec
+      #
+      # app_dir, config_dir ...
+      Rails3::Assist::Directory::Root.root_directories.each do |name|
+        class_eval %{
+          def #{name}_dir options={}
+            ::File.join(Rails3::Assist::Directory::Root.root_dir(options), '#{name}')
+          end        
+        } 
+      end      
+      
+      def rails_dir_for type, options={}
+        raise ArgumentError, '#rails_dir_for takes a dir type argument' if !type
+        dir_method = "#{type}_dir"
+        self.send(dir_method, options) if respond_to?(dir_method)
+      end
+
+      def app_dir_for type, options={}
+        ::File.join(app_dir(options), type.to_s.pluralize)
+      end      
+
+      def config_dir_for type, options={}
+        ::File.join(config_dir(options), type.to_s.pluralize)
+      end      
+
+      def public_dir_for type, options={}
+        ::File.join(public_dir(options), type.to_s.pluralize)
+      end                
     end
-
-    def app_dir_for type, options={}
-      File.join(app_dir(options), type.to_s.pluralize)
-    end      
-
-    def config_dir_for type, options={}
-      File.join(config_dir(options), type.to_s.pluralize)
-    end      
-
-    def public_dir_for type, options={}
-      File.join(public_dir(options), type.to_s.pluralize)
-    end                
+    
+    include Methods
+    extend Methods
+    
   end # Directories   
 end
 

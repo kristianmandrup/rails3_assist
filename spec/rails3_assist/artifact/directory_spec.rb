@@ -19,21 +19,37 @@ describe Rails3::Assist::Artifact::Directory do
     @test = ArtDir.new
   end
 
-  describe '#[artifact_dir]' do
-
-    it "should return mailer directory name" do
-      CLASS.rails_artifacts.should include :mailer, :model
-    end
+  Rails3::Assist::Artifact.app_artifacts.each do |name|
+    eval %{
+      describe '##{name}_dir' do
+        it "should return #{name} directory name" do
+          CLASS.#{name}_dir.should match /app\/\#{name}/
+          @test.#{name}_dir.should match /app\/\#{name}/
+        end
+      end
+    } 
+  end
+    
+  [:initializer, :locale].each do |name|
+    eval %{
+      describe '##{name}_dir' do
+        it "should return #{name} directory name" do
+          CLASS.#{name}_dir.should match /config\/\#{name}/
+          @test.#{name}_dir.should match /config\/\#{name}/
+        end
+      end
+    } 
   end
 
-  describe '#valid_artifact?' do
-    it "should be true that :model is a valid artifact" do
-      CLASS.valid_artifact?(:model).should be_true
-    end
-
-    it "should be false that :unknown is a valid artifact" do
-      CLASS.valid_artifact?(:unknown).should be_false
-    end
+  [:stylesheet, :javascript].each do |name|
+    eval %{
+      describe '##{name}_dir' do
+        it "should return #{name} directory name" do
+          CLASS.#{name}_dir.should match /public\/\#{name}/
+          @test.#{name}_dir.should match /public\/\#{name}/
+        end
+      end
+    } 
   end
 
 end
