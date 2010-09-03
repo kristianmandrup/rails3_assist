@@ -8,7 +8,6 @@ require 'rails3_assist/directory'
 CLASS = Rails3::Assist::Artifact::Path
 
 class ArtDir
-  include Rails3::Assist::Artifact::Directory
   include CLASS
 end
 

@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
      "lib/rails3_assist/file/special.rb",
      "lib/rails3_assist/files.rb",
      "lib/rails3_assist/namespaces.rb",
+     "lib/rails3_assist/rspec/configure.rb",
      "lib/rails3_assist/rspec/macro.rb",
      "lib/rails3_assist/rspec/matchers/have_app_config.rb",
      "lib/rails3_assist/rspec/matchers/have_special_file.rb",
