@@ -19,7 +19,7 @@ module Rails3::Assist
     def use_helper type
       class_eval do
         begin
-          include "Rails3::Assist::#{type.to_s.camelize}".constantize
+          include "Rails3::Assist::Artifact::#{type.to_s.camelize}".constantize
         rescue
           raise ArgumentError, "Unregistered Rails3 helper library: #{type}"
         end
