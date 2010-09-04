@@ -5,7 +5,9 @@ module Rails3::Assist
         dir = rails_dir_for(dir_type)
         FileUtils.mkdir_p dir
       end
-    end                              
+    end
+    
+    extend self                              
   end  
 end
 

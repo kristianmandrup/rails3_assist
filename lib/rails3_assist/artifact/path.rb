@@ -1,5 +1,3 @@
-require 'rails3_assist/directory'
-
 module Rails3::Assist::Artifact
   module Path
     include Rails3::Assist::Artifact::Directory    

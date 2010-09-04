@@ -1,9 +1,4 @@
-require 'rspec'
-require 'rspec/autorun'     
-
-require 'require_all'
-require 'rails3_assist/namespaces'
-require 'rails3_assist/directory'
+require 'spec_helper'
 
 CLASS = Rails3::Assist::Directory::App
 

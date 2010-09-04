@@ -1,15 +1,4 @@
-require 'rspec'
-require 'rspec/autorun'     
-
-require 'require_all'
-require 'fileutils'
-
-require 'fixtures'
-require 'sugar-high/file'
-
-require 'rails3_assist/namespaces'
-require 'rails3_assist/directory'
-require 'rails3_assist/file/special'
+require 'spec_helper'
 
 CLASS = Rails3::Assist::File::Special
 

@@ -1,49 +1,49 @@
-require 'rails3_assist/files'
 require 'sugar-high/regexp'
-require 'rails3_assist/artifact/view'
 
 module Rails3::Assist::Artifact
-  module Files    
-    [:model].each do |name|
-      class_eval %{
-        def #{name}_files expr=nil
-          files = Rails3::Assist::Files.rails_app_files(:#{name.to_s.pluralize}).grep_it expr
-          yield files if block_given?
-          files
-        end          
-      }
+  module Files  
+    module Methods  
+      [:model].each do |name|
+        class_eval %{
+          def #{name}_files expr=nil
+            files = Rails3::Assist::Files.rails_app_files(:#{name.to_s.pluralize}).grep_it expr
+            yield files if block_given?
+            files
+          end          
+        }
+      end
+
+      # artifact files using xxx_[artifact].rb convention, i.e postfixing with type of artifact
+      [:mailer, :observer, :permit, :controller, :helper].each do |name|
+        class_eval %{
+          def #{name}_files expr=nil
+            files = Rails3::Assist::Files.rails_app_files(:#{name.to_s.pluralize}, :pattern => '**/*_#{name}.rb').grep_it expr
+            yield files if block_given?
+            files
+          end  
+        }
+      end   
+
+      def view_files *args 
+        expr, model_name = Helper.get_view_args args
+        ext = last_option(args)[:template_language] || 'erb'
+        pattern = model_name ? "#{model_name.to_s.pluralize}/*.#{ext}*" : "**/*.#{ext}*"
+        files = Rails3::Assist::Files.rails_app_files(:views, :pattern => pattern).grep_it expr
+        yield files if block_given?
+        files          
+      end
+
+
+      [:erb, :haml].each do |name|
+        class_eval %{
+          def #{name}_view_files *args 
+            view_files args, :template_language => :#{name}
+          end
+        }
+      end
     end
-
-    # artifact files using xxx_[artifact].rb convention, i.e postfixing with type of artifact
-    [:mailer, :observer, :permit, :controller, :helper].each do |name|
-      class_eval %{
-        def #{name}_files expr=nil
-          files = Rails3::Assist::Files.rails_app_files(:#{name.to_s.pluralize}, :pattern => '**/*_#{name}.rb').grep_it expr
-          yield files if block_given?
-          files
-        end  
-      }
-    end   
-
-    def view_files *args 
-      expr, model_name = Helper.get_view_args args
-      ext = last_option(args)[:template_language] || 'erb'
-      pattern = model_name ? "#{model_name.to_s.pluralize}/*.#{ext}*" : "**/*.#{ext}*"
-      files = Rails3::Assist::Files.rails_app_files(:views, :pattern => pattern).grep_it expr
-      yield files if block_given?
-      files          
-    end
-
-
-    [:erb, :haml].each do |name|
-      class_eval %{
-        def #{name}_view_files *args 
-          view_files args, :template_language => :#{name}
-        end
-      }
-    end
-
-    extend self
+    extend Methods
+    include Methods
 
     module Helper    
       def self.get_view_args args 

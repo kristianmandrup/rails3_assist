@@ -1,5 +1,5 @@
 require_all File.dirname(__FILE__) + '/directory'
-require 'rails3_assist/artifact/directory'
+require 'rails3_assist/artifact'
 
 module Rails3::Assist
   module Directory      

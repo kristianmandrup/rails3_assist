@@ -1,10 +1,16 @@
 require 'spec_helper'
 
-describe 'controller' do
-  use_helper :app
+CLASS = Rails3::Assist::App
 
+class Helper
+  include Rails3::Assist::Directory::App
+  include Rails3::Assist::Directory::Root
+end
+
+describe 'controller' do
   before do                                         
-    Rails3::Assist::App.rails_root_dir = temp_dir('tmp_rails')
+    Rails3::Assist::Directory.rails_root = fixtures_dir
+    @helper = Helper.new
   end
 
   after do
@@ -12,12 +18,12 @@ describe 'controller' do
   end
     
   it "should create basic root directories" do
-    create_empty_tmp root_directories    
-    root_dir.should have_dirs root_directories
+    @helper.create_empty_tmp @helper.root_directories    
+    @helper.root_dir.should have_dirs(@helper.root_directories)
   end
 
   it "should have basic app directories" do
-    create_empty_tmp app_artifacts
-    app_dir.should have_dirs app_directories
+    @helper.create_empty_tmp @helper.app_artifacts
+    @helper.app_dir.should have_dirs(@helper.app_directories)
   end
 end

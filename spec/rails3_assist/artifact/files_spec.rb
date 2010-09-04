@@ -1,12 +1,4 @@
-require 'rspec'
-require 'rspec/autorun'     
-
-require 'fixtures'
-require 'sugar-high/file'
-
-require 'require_all'
-require 'rails3_assist/namespaces'
-require 'rails3_assist/files'
+require 'spec_helper'
 
 CLASS = Rails3::Assist::Artifact::Files
 

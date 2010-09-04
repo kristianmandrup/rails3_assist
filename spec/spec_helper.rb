@@ -13,9 +13,7 @@ require 'tmpdir'
 # end
 #    
 
-def fixtures_dir
-  File.dirname(__FILE__) + '/fixtures'  
-end
+require 'fixtures'
 
 def project_dir
   File.dirname(__FILE__) + '/..'
