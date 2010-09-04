@@ -37,6 +37,7 @@ end
 Rails3::Assist::Directory.rails_root = temp_dir('tmp_rails')
 
 RSpec.configure do |config|
+  config.mock_with :mocha
   config.after do
     remove_temp_dir 'tmp_rails'
   end

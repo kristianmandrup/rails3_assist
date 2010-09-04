@@ -7,6 +7,12 @@ module Rails3::Assist
         include ::Thor::Actions
       end
     end
+
+    module ClassMethods
+      def multi_aliases_for name
+        multi_alias :_after_ => name, :create => :new, :insert_into => [:inject_into, :update], :read => :X_content, :remove => :delete                    
+      end
+    end
                  
     protected
 
@@ -39,8 +45,14 @@ module Rails3::Assist
       ''
     end
 
-    def marker_option name, type, options={}      
-      marker_content = type ? send(:"#{type}_marker", name, options) : name.to_s.camelize
+    def marker_option name, options={}      
+      type = last_option(options)[:type]
+      marker_content = if type
+        method = :"#{type}_marker"
+        orm_marker = send method, name, options if respond_to? method 
+      else
+        name.to_s.camelize
+      end 
       options[:before] ? {:before => marker_content} : {:after => marker_content}      
     end
   end
