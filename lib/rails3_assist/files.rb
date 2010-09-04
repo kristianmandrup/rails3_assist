@@ -1,6 +1,7 @@
 require 'rake'
 require 'rails3_assist/directory'
 require 'sugar-high/regexp'
+
 require_all File.dirname(__FILE__) + '/file'
 
 module Rails3::Assist
@@ -14,20 +15,16 @@ module Rails3::Assist
         expr = options[:expr]
         file_pattern = options[:pattern] || RYBY_FILES
         pattern = "#{dir}/#{file_pattern}"
-        files = FileList[pattern].to_a
-        files = files.grep(expr.to_regexp) if expr
-        files
+        FileList[pattern].to_a.grep_it expr
       end
     
       def all_files expr=nil
         pattern = "#{Rails3::Assist::Directory::Root.root_dir}/**/*.*"
-        files = FileList[pattern].to_a
-        files = files.grep(expr.to_regexp) if expr
-        files
+        FileList[pattern].to_a.grep_it expr 
       end  
 
       def app_files expr=nil
-        rails_app_files(:app).grep expr
+        rails_app_files(:app).grep_it expr
       end  
 
       # files_from :model, :controller, :matching => /user/

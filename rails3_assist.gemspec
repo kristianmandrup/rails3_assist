@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2010-09-03}
+  s.date = %q{2010-09-04}
   s.description = %q{Assist in operating on Rails 3 artifacts including migrations}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
      "lib/rails3_assist/artifact/directory.rb",
      "lib/rails3_assist/artifact/files.rb",
      "lib/rails3_assist/artifact/path.rb",
-     "lib/rails3_assist/artifact/view.rb",
      "lib/rails3_assist/base.rb",
      "lib/rails3_assist/directory.rb",
      "lib/rails3_assist/directory/app.rb",
