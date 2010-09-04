@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails3_assist}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
      "lib/rails3_assist/artifact/directory.rb",
      "lib/rails3_assist/artifact/files.rb",
      "lib/rails3_assist/artifact/path.rb",
-     "lib/rails3_assist/base.rb",
      "lib/rails3_assist/directory.rb",
      "lib/rails3_assist/directory/app.rb",
      "lib/rails3_assist/directory/container.rb",
@@ -115,7 +114,6 @@ Gem::Specification.new do |s|
      "spec/rails3_assist/artifact/files_spec.rb",
      "spec/rails3_assist/artifact/path_spec.rb",
      "spec/rails3_assist/artifact_spec.rb",
-     "spec/rails3_assist/base_spec.rb",
      "spec/rails3_assist/directory/app_spec.rb",
      "spec/rails3_assist/directory/container_spec.rb",
      "spec/rails3_assist/directory/root_spec.rb",
@@ -168,7 +166,6 @@ Gem::Specification.new do |s|
      "spec/rails3_assist/artifact/files_spec.rb",
      "spec/rails3_assist/artifact/path_spec.rb",
      "spec/rails3_assist/artifact_spec.rb",
-     "spec/rails3_assist/base_spec.rb",
      "spec/rails3_assist/directory/app_spec.rb",
      "spec/rails3_assist/directory/container_spec.rb",
      "spec/rails3_assist/directory/root_spec.rb",
