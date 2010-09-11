@@ -1,7 +1,7 @@
 require 'rspec'
 require 'rspec/autorun'     
 require 'rails3_assist'
-# require 'rails-app-spec'
+require 'rails3-app-spec'
 require 'tmpdir'
 
 # RSpec::Generator.configure do |config|

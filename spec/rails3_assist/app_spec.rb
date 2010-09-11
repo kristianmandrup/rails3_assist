@@ -3,8 +3,9 @@ require 'spec_helper'
 CLASS = Rails3::Assist::App
 
 class Helper
-  include Rails3::Assist::Directory::App
-  include Rails3::Assist::Directory::Root
+  include Rails3::Assist::App
+  include Rails3::Assist::Directory
+  include Rails3::Assist::Artifact
 end
 
 describe 'controller' do
@@ -18,7 +19,7 @@ describe 'controller' do
   end
     
   it "should create basic root directories" do
-    @helper.create_empty_tmp @helper.root_directories    
+    CLASS.create_empty_tmp @helper.root_directories    
     @helper.root_dir.should have_dirs(@helper.root_directories)
   end
 
