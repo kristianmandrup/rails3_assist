@@ -6,7 +6,7 @@ module Rails3::Assist::Directory
       end
 
       def root_dir options={}
-        raise ArgumentError, "options argument to root_dir must be a hash" if options && !options.kind_of?(Hash)
+        raise ArgumentError, "options argument to root_dir must be a hash, was: #{options.inspect}" if options && !options.kind_of?(Hash)
         dir = options[:root_path] 
         dir ||= Rails3::Assist::Directory.rails_root || Rails.root
         raise "You must set the Rails app root dir: Rails::Assist::App.root_dir = '/my/root/dir'" if !dir
