@@ -3,7 +3,8 @@ require 'spec_helper'
 CLASS = Rails3::Assist::File
 
 class AppDir
-  include CLASS
+  extend Rails3::Assist::UseMacro
+  use_helper :file
 end
 
 describe Rails3::Assist::File do
