@@ -10,7 +10,7 @@ module Rails3::Assist
           end            
           
           def #{name}_file name
-            name = (name =~ /.rb$/) ? name : "\#{name}#{ext}'
+            name = (name =~ /.rb$/) ? name : "\#{name}#{ext}"
             ::File.join(Rails3::Assist::Artifact::Directory.#{name}_dir, name)
           end  
 
