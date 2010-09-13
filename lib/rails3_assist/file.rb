@@ -6,8 +6,9 @@ module Rails3::Assist
 
         class_eval %{      
           def #{name}_file? name
-            File.file? #{name}_file(name)
+            ::File.file? #{name}_file(name)
           end            
+          alias_method :has_#{name}_file?, :#{name}_file?
           
           def #{name}_file name
             name = (name =~ /.rb$/) ? name : "\#{name}#{ext}"
