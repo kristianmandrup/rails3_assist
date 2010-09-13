@@ -15,10 +15,14 @@ module Rails3::Assist::File
       def seed_file
         File.join(Rails3::Assist::Directory.db_dir, 'seeds.rb')
       end
+
+      def gem_file
+        File.join(Rails3::Assist::Directory.root_dir, 'Gemfile')
+      end
     
       # read_application_file
       # append_to_application_file
-      [:application, :environment, :seed].each do |name|
+      [:application, :environment, :seed, :gem_file].each do |name|
         class_eval %{      
           def read_#{name}_file     
             fname = #{name}_file
