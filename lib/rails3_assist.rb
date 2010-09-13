@@ -20,11 +20,11 @@ module Rails3::Assist
   end
 end
 
-require 'rails3_assist/rspec/configure'
-
 require 'rails3_assist/app'
 require 'rails3_assist/directory'
 require 'rails3_assist/file'
 require 'rails3_assist/files'
 require 'rails3_assist/artifact'
+
+require 'rails3_assist/rspec/configure'
 

@@ -3,8 +3,8 @@
 
 module RSpec::Rails::ContentMatchers
   class HaveAppConfig
-
-    use_rails_file_helpers :special # TODO !!!
+    extend Rails3::Assist::UseMacro
+    use_helpers :file
     
     attr_reader :left_side, :right_side, :operator
 
