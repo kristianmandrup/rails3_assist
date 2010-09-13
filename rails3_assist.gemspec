@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails3_assist}
-  s.version = "0.3.2"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2010-09-11}
+  s.date = %q{2010-09-13}
   s.description = %q{Assist in operating on Rails 3 artifacts including migrations}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
@@ -85,6 +85,10 @@ Gem::Specification.new do |s|
      "spec/fixtures/db/seeds.rb",
      "spec/fixtures/doc/README_FOR_APP",
      "spec/fixtures/lib/tasks/.gitkeep",
+     "spec/fixtures/log/development.log",
+     "spec/fixtures/log/production.log",
+     "spec/fixtures/log/server.log",
+     "spec/fixtures/log/test.log",
      "spec/fixtures/public/404.html",
      "spec/fixtures/public/422.html",
      "spec/fixtures/public/500.html",
