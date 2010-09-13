@@ -20,7 +20,7 @@ module Rails3::Assist
   end
 end
 
-require 'rails3_assist/rspec/macro'
+require 'rails3_assist/rspec/configure'
 
 require 'rails3_assist/app'
 require 'rails3_assist/directory'
