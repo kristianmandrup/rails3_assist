@@ -1,9 +1,9 @@
-module Rails::Assist
+module Rails3::Assist
   module UseMacro
     def use_orm orm
       class_eval do
         begin
-          include "Rails::Assist::Orm::#{orm.to_s.camelize}".constantize
+          include "Rails3::Assist::Orm::#{orm.to_s.camelize}".constantize
         rescue
           raise ArgumentError, "Unregistered ORM library: #{orm}"
         end
@@ -19,7 +19,7 @@ module Rails::Assist
     def use_helper type
       class_eval do
         begin
-          include "Rails::Assist::#{type.to_s.camelize}".constantize
+          include "Rails3::Assist::Artifact::#{type.to_s.camelize}".constantize
         rescue
           raise ArgumentError, "Unregistered Rails3 helper library: #{type}"
         end
@@ -30,5 +30,6 @@ module Rails::Assist
 end
                               
 RSpec.configure do |config|
-  config.extend(Rails::Assist::UseMacro) 
+  config.extend Rails3::Assist::UseMacro
+  config.include Rails3::Assist::UseMacro
 end

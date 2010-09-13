@@ -1,8 +1,7 @@
 require 'rspec'
 require 'rspec/autorun'     
-# require 'generator_spec'
 require 'rails3_assist'
-require 'rails-app-spec'
+require 'rails3-app-spec'
 require 'tmpdir'
 
 # RSpec::Generator.configure do |config|
@@ -13,6 +12,8 @@ require 'tmpdir'
 #   config.logger = :stdout  
 # end
 #    
+
+require 'fixtures'
 
 def project_dir
   File.dirname(__FILE__) + '/..'
@@ -31,9 +32,10 @@ def remove_temp_dir name
   FileUtils.rm_rf temp_dir(name)
 end
 
-Rails::Assist::App.rails_root_dir = temp_dir('tmp_rails')
+Rails3::Assist::Directory.rails_root = temp_dir('tmp_rails')
 
 RSpec.configure do |config|
+  config.mock_with :mocha
   config.after do
     remove_temp_dir 'tmp_rails'
   end

@@ -2,6 +2,13 @@
 
 Includes various helpers to assist operating on a Rails 3 application, including various Rails 3 artifacts, such as migrations etc.
 
+## Development status
+
+TODO specs: artifact
+
+* files
+* directory
+
 ## Rails Artifacts
 
 Rails assist also includes various artifact libraries to help operate on different Rails 3 artifacts. 
@@ -24,6 +31,7 @@ Rails 3 artifacts that have a CRUD assistant:
 * model (insert bug!)
 * observer
 * view
+* permit (NEW - used with cancan)
 
 ## Model
 
@@ -60,10 +68,9 @@ Example:
 
 Aliases: *use_helpers* and *use_helper*
 
-## Known issues
+## TODO
 
-* View generation fails when action arg supplied :( To be fixed ASAP
- - rails3_assist/artifact/view.rb:7:in `[]' can't convert Symbol into Integer
+Refactor: split it up into smaller gems and modules to be loaded individually as the need arises.
 
 ## Note on Patches/Pull Requests
  
