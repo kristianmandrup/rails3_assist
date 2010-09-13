@@ -7,11 +7,14 @@ begin
     gem.email = "kmandrup@gmail.com"
     gem.homepage = "http://github.com/kristianmandrup/rails3-assist"
     gem.authors = ["Kristian Mandrup"]
-    gem.add_development_dependency "rspec", ">= 2.0.0.beta.19"
-    gem.add_development_dependency 'rails-app-spec', '>= 0.2.2'
+    gem.add_development_dependency "rspec",           "~> 2.0.0.beta.22"
+    gem.add_development_dependency 'rails-app-spec',  '~> 0.2.5'
 
-    gem.add_dependency "require_all",       ">= 1.1.0"
-    gem.add_dependency "migration_assist", ">= 0.1.2"
+    gem.add_dependency "require_all",       "~> 1.1.0"
+    gem.add_dependency "sugar-high",        "~> 0.2.5"
+    gem.add_dependency "activesupport",     "~> 3.0.0"
+    gem.add_dependency "migration_assist",  "~> 0.1.3"
+    gem.add_dependency "thor",              "~> 0.14.0"
 
     # gem.add_development_dependency "generator-rspec", ">= 0.6.0"
 
