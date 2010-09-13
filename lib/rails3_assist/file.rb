@@ -5,8 +5,12 @@ module Rails3::Assist
         plural_name = name.to_s.pluralize
 
         class_eval %{      
+          def #{name}_file? name
+            File.file? #{name}_file(name)
+          end            
+          
           def #{name}_file name
-            name = (name =~ /.rb$/) ? name : name + '#{ext}'
+            name = (name =~ /.rb$/) ? name : "\#{name}#{ext}'
             ::File.join(Rails3::Assist::Artifact::Directory.#{name}_dir, name)
           end  
 
