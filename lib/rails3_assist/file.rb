@@ -9,6 +9,13 @@ module Rails3::Assist
             ::File.file? #{name}_file(name)
           end            
           alias_method :has_#{name}_file?, :#{name}_file?
+
+          def #{name}_files? *names
+            names.to_strings.each do |name|
+              return false if !#{name}_file?(name)
+            end
+            true
+          end            
           
           def #{name}_file name
             name = (name =~ /.rb$/) ? name : "\#{name}#{ext}"

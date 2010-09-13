@@ -76,25 +76,37 @@ module Rails3::Assist
         }
       end
       
-      Rails3::Assist::Artifact.app_artifacts.each do |name|
-        plural_name = name.to_s.pluralize
-        class_eval %{
-          def remove_all_#{plural_name}
-            Rails3::Assist::Artifact::Files.#{name}_files.each{|f| ::File.delete_file! f}
-          end
-          alias_method :delete_all_#{plural_name}, :remove_all_#{plural_name}           
-
-          def remove_#{plural_name} *names
-            return remove_all_#{plural_name} if names.empty? 
-            names.to_strings.each do |name|
-              ::File.delete #{name}_file(name)
-            end
-          end
-          alias_method :delete_#{plural_name}, :remove_#{plural_name} 
-          alias_method :remove_#{name}, :remove_#{plural_name} 
-          alias_method :delete_#{name}, :remove_#{plural_name}           
-        } 
-      end    
+      # Rails3::Assist::Artifact.app_artifacts.each do |name|
+      #   plural_name = name.to_s.pluralize
+      #   class_eval %{
+      #     def #{name}_files? *names
+      #       names.to_strings.each do |name|
+      #         return false if !#{name}_file?(name)
+      #       end
+      #       true
+      #     end          
+      # 
+      #     def #{name}_file? name
+      #       ::File.file? #{name}_file(name)
+      #     end            
+      #     alias_method :has_#{name}_file?, :#{name}_file?
+      #     
+      #     def remove_all_#{plural_name}
+      #       Rails3::Assist::Artifact::Files.#{name}_files.each{|f| ::File.delete_file! f}
+      #     end
+      #     alias_method :delete_all_#{plural_name}, :remove_all_#{plural_name}           
+      # 
+      #     def remove_#{plural_name} *names
+      #       return remove_all_#{plural_name} if names.empty? 
+      #       names.to_strings.each do |name|
+      #         ::File.delete #{name}_file(name)
+      #       end
+      #     end
+      #     alias_method :delete_#{plural_name}, :remove_#{plural_name} 
+      #     alias_method :remove_#{name}, :remove_#{plural_name} 
+      #     alias_method :delete_#{name}, :remove_#{plural_name}           
+      #   } 
+      # end    
     end    
     
     include Methods
