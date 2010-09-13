@@ -22,7 +22,7 @@ module Rails3::Assist
 
           def remove_#{plural_name} *names
             return remove_all_#{plural_name} if names.empty? 
-            names.each do |name|
+            names.to_strings.each do |name|
               ::File.delete #{name}_file(name)
             end
           end
