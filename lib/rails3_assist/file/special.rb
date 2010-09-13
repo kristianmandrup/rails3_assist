@@ -32,6 +32,14 @@ module Rails3::Assist::File
           def append_to_#{name}_file content=nil, &block
             File.append(#{name}_file, content, &block)
           end
+
+          def replace_in_#{name}_file options = {}, &block
+            File.replace_content_from(#{name}_file, options, &block)
+          end
+
+          def remove_from_#{name}_file content=nil, &block
+            File.remove_from(#{name}_file, content, &block)
+          end
         }
       end    
     end

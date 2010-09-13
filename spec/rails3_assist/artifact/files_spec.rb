@@ -3,11 +3,12 @@ require 'spec_helper'
 CLASS = Rails3::Assist::Artifact::Files
 
 class ArtDir
-  include CLASS
+  extend Rails3::Assist::UseMacro
+  use_helper :files  
 end
 
 describe Rails3::Assist::Artifact::Files do
-  # use_helper :directories
+  use_helper :directory
 
   before do
     Rails3::Assist::Directory.rails_root = fixtures_dir

@@ -11,7 +11,7 @@ module Rails3::Assist
       RYBY_FILES = '**/*.rb'
       
       def rails_app_files type = :app, options = {}
-        dir = Rails3::Assist::Artifact::Directory.send "#{type.to_s.singularize}_dir"
+        dir = Rails3::Assist::Directory.send "#{type.to_s.singularize}_dir"
         expr = options[:expr]
         file_pattern = options[:pattern] || RYBY_FILES
         pattern = "#{dir}/#{file_pattern}"

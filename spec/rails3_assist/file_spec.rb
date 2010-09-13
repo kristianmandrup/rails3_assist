@@ -16,7 +16,7 @@ describe Rails3::Assist::File do
 
   describe '#initializer_file' do
     it "should return the initializer file 'mime_type' " do
-      CLASS.initializer_file('mime_type').should match /mime_type/
+      AppDir.new.initializer_file('mime_type').should match /mime_type/
     end
   end    
 

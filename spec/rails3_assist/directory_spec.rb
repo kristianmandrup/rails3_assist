@@ -3,7 +3,8 @@ require 'spec_helper'
 CLASS = Rails3::Assist::Directory
 
 class RailsDir
-  include CLASS
+  extend Rails3::Assist::UseMacro
+  use_helper :directory
 end
 
 describe Rails3::Assist::Directory do

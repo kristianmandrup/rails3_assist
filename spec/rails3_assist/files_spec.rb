@@ -3,7 +3,8 @@ require 'spec_helper'
 CLASS = Rails3::Assist::Files
 
 class AppDir
-  include CLASS
+  extend Rails3::Assist::UseMacro
+  use_helper :files
 end
 
 describe Rails3::Assist::Files do
@@ -15,7 +16,7 @@ describe Rails3::Assist::Files do
 
   describe '#rails_app_files' do
     it "should return all :app files using default pattern" do
-      CLASS.rails_app_files(:model)
+      AppDir.new.rails_app_files(:model)
     end
   end
 

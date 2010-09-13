@@ -5,11 +5,20 @@ module Rails3::Assist
   module Directory      
     class << self
       attr_accessor :rails_root
+      
+      def method_missing(sym, *args, &block)
+        Rails3::Assist::Artifact::Directory.send sym
+      end
     end    
 
     include Root
+    extend Root
+
     include App
+    extend App
+
     include Container    
+    extend Container
         
     # dir_for helpers
     # -------------------
