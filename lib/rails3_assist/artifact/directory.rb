@@ -17,7 +17,7 @@ module Rails3::Assist::Artifact
         
       # initializer_dir, locale_dir
       # stylesheet_dir, javascript_dir    
-      {:config => [:initializer, :locale], :public => [:stylesheet, :javascript]}.each_pair do |container, names|
+      {:config => Rails3::Assist.specials(:config), :public => Rails3::Assist.specials(:public)}.each_pair do |container, names|
         names.each do |name|
           class_eval %{      
             def #{name}_dir options={}

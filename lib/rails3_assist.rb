@@ -14,6 +14,18 @@ module Rails3::Assist
   def self.artifacts
     [:observer, :controller, :helper, :mailer, :model, :migration, :permit]
   end
+
+  def self.specials type
+    case type
+    when :config
+      [:initializer, :locale]
+    when :public
+      [:stylesheet, :javascript]
+    else
+      raise ArgumentError, "Unknown specials type #{type}. Specify :config or :public" if type && type != :all
+      [:initializer, :locale] + [:stylesheet, :javascript]
+    end
+  end
   
   class << self
     attr_accessor :debug_on
