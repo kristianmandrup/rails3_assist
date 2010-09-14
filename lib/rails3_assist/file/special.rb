@@ -22,7 +22,7 @@ module Rails3::Assist::File
     
       # read_application_file
       # append_to_application_file
-      [:application, :environment, :seed, :gem_file].each do |name|
+      [:application, :environment, :seed, :gem].each do |name|
         class_eval %{      
           def read_#{name}_file     
             fname = #{name}_file
