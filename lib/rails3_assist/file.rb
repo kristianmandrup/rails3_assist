@@ -1,11 +1,12 @@
 module Rails3::Assist
   module File
     module Methods
-      {:initializer => '.rb', :db => '.rb', :migration => '.rb', :locale => '.yml', :javascript => 'js', :stylesheet => 'css'}.each_pair do |name, ext|
+      {:initializer => 'rb', :db => 'rb', :migration => 'rb', :locale => 'yml', :javascript => 'js', :stylesheet => 'css'}.each_pair do |name, ext|
         plural_name = name.to_s.pluralize
-
+        pure_ext = ext.gsub /^\./, ''
         class_eval %{      
           def #{name}_file? name
+            name = (name =~ /.rb$/) ? name : "\#{name}.#{pure_ext}"            
             ::File.file? #{name}_file(name)
           end            
           alias_method :has_#{name}_file?, :#{name}_file?
@@ -18,7 +19,7 @@ module Rails3::Assist
           end            
           
           def #{name}_file name
-            name = (name =~ /.rb$/) ? name : "\#{name}#{ext}"
+            name = (name =~ /.rb$/) ? name : "\#{name}.#{pure_ext}"
             ::File.join(Rails3::Assist::Artifact::Directory.#{name}_dir, name)
           end  
 
@@ -35,6 +36,7 @@ module Rails3::Assist
           def remove_#{plural_name} *names
             return remove_all_#{plural_name} if names.empty? 
             names.to_strings.each do |name|
+              name = (name =~ /.rb$/) ? name : "\#{name}.#{pure_ext}"
               ::File.delete #{name}_file(name)
             end
           end
