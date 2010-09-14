@@ -24,8 +24,9 @@ module Rails3::Assist
           end  
 
           def create_#{name} name, &block
-            dir = Rails3::Assist::Artifact::Directory.#{name}_dir
-            Rails3::Assist::App.create_empty_tmp dir if !::File.directory?(dir)
+            dir_name = Rails3::Assist::Artifact::Directory.#{name}_dir
+            puts "DIR for #{name}: \#{dir_name}"
+            Rails3::Assist::App.create_empty_tmp(dir_name) if !::File.directory?(dir_name)
             ::File.overwrite #{name}_file(name) do
               yield
             end

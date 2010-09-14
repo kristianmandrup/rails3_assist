@@ -30,6 +30,17 @@ describe Rails3::Assist::File do
     end
   end    
 
+  describe '#create_javascript' do
+    it "should create the javascript file 'my_init' " do
+      name = :effects
+      CLASS.create_javascript(name) do
+        'hello'
+      end
+      CLASS.javascript_file(name).should match /#{name}/
+    end
+  end    
+
+
   describe '#remove_initializers' do
     before do         
       name = 'my_init' 
