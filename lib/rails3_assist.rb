@@ -15,7 +15,7 @@ module Rails3::Assist
     [:observer, :controller, :helper, :mailer, :model, :migration, :permit]
   end
 
-  def self.specials type
+  def self.specials type=nil
     case type
     when :config
       [:initializer, :locale]
