@@ -24,7 +24,8 @@ module Rails3::Assist
           end  
 
           def create_#{name} name, &block
-            Rails3::Assist::App.create_empty_tmp #{name}_dir if !::File.directory?(Rails3::Assist::Artifact::Directory.#{name}_dir)
+            dir = Rails3::Assist::Artifact::Directory.#{name}_dir
+            Rails3::Assist::App.create_empty_tmp dir if !::File.directory?(dir)
             ::File.overwrite #{name}_file(name) do
               yield
             end
@@ -40,7 +41,7 @@ module Rails3::Assist
             names.to_strings.each do |name|
               name = (name =~ /.rb$/) ? name : "\#{name}.#{pure_ext}"
               file_name = #{name}_file(name)
-              ::File.delete file_name if ::File.file?(file_name)
+              ::File.delete(file_name) if ::File.file?(file_name)
             end
           end
           alias_method :remove_#{name}, :remove_#{plural_name} 
