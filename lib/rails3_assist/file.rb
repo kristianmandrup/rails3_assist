@@ -1,3 +1,5 @@
+require_all File.dirname(__FILE__) + '/file'
+
 module Rails3::Assist
   module File
     module Methods
@@ -48,6 +50,9 @@ module Rails3::Assist
         }
       end
     end
+
+    include Special
+    extend Special
     
     include Methods
     extend Methods

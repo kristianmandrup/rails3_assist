@@ -3,15 +3,13 @@ require 'spec_helper'
 CLASS = Rails3::Assist::File::Special
 
 class AppDir
-  include CLASS
+  extend Rails3::Assist::UseMacro
+  use_helper :special
 end
 
 describe Rails3::Assist::File::Special do
-  # use_helper :directories
-
   before do
     Rails3::Assist::Directory.rails_root = fixtures_dir     
-    # puts Rails3::Assist::Directory.methods.sort
   end
 
   [:application, :environment, :seed].each do |name|
@@ -28,7 +26,7 @@ describe Rails3::Assist::File::Special do
 
       describe '##{name}_file' do
         it "should return the #{name} file path" do
-          CLASS.#{name}_file.should match /#{name}s?\\.rb/
+          AppDir.new.#{name}_file.should match /#{name}s?\\.rb/
         end
       end
 
