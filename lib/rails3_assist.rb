@@ -38,5 +38,4 @@ require 'rails3_assist/file'
 require 'rails3_assist/files'
 require 'rails3_assist/artifact'
 
-require 'rails3_assist/rspec/configure'
 

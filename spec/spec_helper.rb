@@ -1,5 +1,6 @@
 require 'rspec/core'
 require 'rails3_assist'
+require 'rails3_assist/rspec'
 require 'rails-app-spec'
 require 'tmpdir'
 
