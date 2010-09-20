@@ -8,9 +8,9 @@ begin
     gem.homepage = "http://github.com/kristianmandrup/rails3-assist"
     gem.authors = ["Kristian Mandrup"]
     gem.add_development_dependency "rspec",           "~> 2.0.0.beta.22"
-    gem.add_development_dependency 'rails-app-spec',  '~> 0.2.11'
+    gem.add_development_dependency 'rails-app-spec',  '~> 0.2.14'
 
-    gem.add_dependency "require_all",       "~> 1.1.0"
+    gem.add_dependency "require_all",       "~> 1.2.0"
     gem.add_dependency "sugar-high",        "~> 0.2.10"
     gem.add_dependency "activesupport",     "~> 3.0.0"
     gem.add_dependency "migration_assist",  "~> 0.1.4"
