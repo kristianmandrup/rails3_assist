@@ -1,4 +1,4 @@
-require 'rspec'
+require 'rspec/core'
 require 'rails3_assist'
 require 'rails-app-spec'
 require 'tmpdir'
