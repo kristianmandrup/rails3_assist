@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
      "lib/rails3_assist/namespaces.rb",
      "lib/rails3_assist/rspec.rb",
      "lib/rails3_assist/rspec/configure.rb",
+     "rails3_assist.gemspec",
      "rails_generator.log",
      "spec/fixtures.rb",
      "spec/fixtures/.gitignore",
