@@ -4,13 +4,17 @@ module Rails3::Assist::File
   module Special          
     module Methods
       # application_file, environment_file
-      [:application, :environment].each do |name|
+      [:application, :environment, :routes, :boot].each do |name|
         class_eval %{
           def #{name}_file
             File.join(Rails3::Assist::Directory.config_dir, '#{name}.rb')
-          end         
+          end
         }
       end  
+
+      def database_file
+        File.join(Rails3::Assist::Directory.config_dir, 'database.yml')
+      end
 
       def seed_file
         File.join(Rails3::Assist::Directory.db_dir, 'seeds.rb')
@@ -22,7 +26,7 @@ module Rails3::Assist::File
     
       # read_application_file
       # append_to_application_file
-      [:application, :environment, :seed, :gem].each do |name|
+      [:application, :environment, :seed, :gem, :routes, :boot, :database].each do |name|
         class_eval %{      
           def read_#{name}_file     
             fname = #{name}_file

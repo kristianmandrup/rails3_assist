@@ -12,7 +12,7 @@ describe Rails3::Assist::File::Special do
     Rails3::Assist::Directory.rails_root = fixtures_dir     
   end
 
-  [:application, :environment, :seed].each do |name|
+  [:application, :environment, :seed, :routes, :boot].each do |name|
     eval %{
       before :each do                   
         file_name = CLASS.#{name}_file
