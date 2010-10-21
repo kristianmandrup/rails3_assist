@@ -72,58 +72,19 @@ describe Rails3::Assist::Files do
   describe '#initializer_files' do
     it "should return files for initializer directory" do    
       CLASS.initializer_files.file_names.should include('mime_types.rb', 'secret_token.rb')
-    end
-  
-    it "should return files for initializer directory" do    
-      files = CLASS.initializer_files('mime').file_names
-      files.should include('mime_types.rb')
-      files.should_not include('secret_token.rb')
-    end
-  
-    it "should return files for initializer directory, in a block" do    
-      CLASS.initializer_files('mime') do |files|
-        files.file_names.should include('mime_types.rb')
-        files.file_names.should_not include('secret_token.rb')  
-      end      
-    end
+    end  
   end
   
   
   describe '#locale_files' do
     it "should return files for locale directory" do    
       CLASS.locale_files.file_names.should include('en.yml')
-    end
-  
-    it "should return files for initializer directory" do    
-      files = CLASS.initializer_files('mime').file_names
-      files.should include('mime_types.rb')
-      files.should_not include('secret_token.rb')
-    end
-    
-    it "should return files for initializer directory, in a block" do    
-      CLASS.initializer_files('mime') do |files|
-        files.file_names.should include('mime_types.rb')
-        files.file_names.should_not include('secret_token.rb')  
-      end      
-    end
+    end  
   end
   
   describe '#css_files' do
     it "should return files for css directory" do    
       CLASS.css_files.file_names.should include('scaffold.css')
-    end
-  
-    it "should return files for initializer directory" do    
-      files = CLASS.initializer_files('mime').file_names
-      files.should include('mime_types.rb')
-      files.should_not include('secret_token.rb')
-    end
-    
-    it "should return files for initializer directory, in a block" do    
-      CLASS.initializer_files('mime') do |files|
-        files.file_names.should include('mime_types.rb')
-        files.file_names.should_not include('secret_token.rb')  
-      end      
-    end
+    end  
   end
 end  
