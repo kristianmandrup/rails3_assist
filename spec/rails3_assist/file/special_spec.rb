@@ -79,9 +79,30 @@ describe Rails3::Assist::File::Special do
     end
   end
 
+  describe '#clean_gemfile' do    
+    it 'should be true that it has cleaned the Gemfile ensuring newlines between each gem' do
+      old_gem_file_content = AppDir.new.read_gem_file
+
+      CLASS.append_to_gem_file do
+        "gem 'hello'gem 'hi'gem 'blip'"
+      end
+
+      AppDir.new.clean_gemfile
+
+      expected = "gem 'hello'\ngem 'hi'"
+
+      AppDir.new.read_gem_file.should match /#{Regexp.escape(expected)}/      
+
+      File.overwrite CLASS.gem_file do
+        old_gem_file_content
+      end
+    end
+  end
+
   describe '#has_gem_version?' do    
-    it 'should be true that it has the rails gem 3.0.0' do
-      AppDir.new.has_gem_version?(:rails, '3.0.0').should be_true
+    it 'should be true that it has the rails gem 3.0.3' do
+      # puts AppDir.new.read_gem_file      
+      AppDir.new.has_gem_version?(:rails, '3.0.3').should be_true
     end
 
     it 'should be false that it has the rails gem 3.0.1' do

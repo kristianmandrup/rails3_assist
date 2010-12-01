@@ -31,6 +31,11 @@ module Rails3::Assist::File
       def has_gem_version? name, version = nil
         File.new(gem_file).read =~ /gem\s+('|")#{name}\1,\s*('|")#{version}\2/
       end
+
+      def clean_gemfile
+        clean_gemfile_content = read_gem_file.gsub(/('|")\s*gem/m, "\\1\ngem")
+        File.open(gem_file, 'w') {|f| f.write(clean_gemfile_content) }
+      end
     
       # read_application_file
       # append_to_application_file
