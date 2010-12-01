@@ -56,4 +56,36 @@ describe Rails3::Assist::File::Special do
       end
     }
   end
+  
+  describe '#gem_file' do
+    it 'should return the Gemfile path' do
+      AppDir.new.gem_file.should match /Gemfile/
+    end
+  end
+  
+  describe '#read_gem_file' do  
+    it 'should read the Gemfile' do
+      AppDir.new.read_gem_file.should match /gem 'rails'/
+    end
+  end
+
+  describe '#has_gem?' do    
+    it 'should be true that it has the rails gem' do
+      AppDir.new.has_gem?(:rails).should be_true
+    end
+
+    it 'should be false that it has the rails2 gem' do
+      AppDir.new.has_gem?(:rails2).should be_false
+    end
+  end
+
+  describe '#has_gem_version?' do    
+    it 'should be true that it has the rails gem 3.0.0' do
+      AppDir.new.has_gem_version?(:rails, '3.0.0').should be_true
+    end
+
+    it 'should be false that it has the rails gem 3.0.1' do
+      AppDir.new.has_gem_version?(:rails, '3.0.1').should be_false
+    end
+  end
 end

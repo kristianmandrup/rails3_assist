@@ -23,6 +23,14 @@ module Rails3::Assist::File
       def gem_file
         File.join(Rails3::Assist::Directory.root_dir, 'Gemfile')
       end
+      
+      def has_gem? name
+        File.new(gem_file).read =~ /gem\s+('|")#{name}\1/
+      end
+
+      def has_gem_version? name, version = nil
+        File.new(gem_file).read =~ /gem\s+('|")#{name}\1,\s*('|")#{version}\2/
+      end
     
       # read_application_file
       # append_to_application_file

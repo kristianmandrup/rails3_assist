@@ -5,5 +5,3 @@ module RSpec
     modules :content_matchers
   end
 end
-
-# require_all File.dirname(__FILE__) + '/matchers'
