@@ -97,6 +97,24 @@ describe Rails3::Assist::File::Special do
         old_gem_file_content
       end
     end
+
+    it 'should be true that it has cleaned the Gemfile ensuring newlines between each gem and after end' do
+      old_gem_file_content = AppDir.new.read_gem_file
+
+      CLASS.append_to_gem_file do
+        "group :dev endgem 'hi'gem 'blip'"
+      end
+
+      AppDir.new.clean_gemfile
+
+      expected = "group :dev end\ngem 'hi'"
+
+      AppDir.new.read_gem_file.should match /#{Regexp.escape(expected)}/      
+
+      File.overwrite CLASS.gem_file do
+        old_gem_file_content
+      end
+    end
   end
 
   describe '#has_gem_version?' do    

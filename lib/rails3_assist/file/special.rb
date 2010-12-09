@@ -33,7 +33,7 @@ module Rails3::Assist::File
       end
 
       def clean_gemfile
-        clean_gemfile_content = read_gem_file.gsub(/('|")\s*gem/m, "\\1\ngem")
+        clean_gemfile_content = read_gem_file.gsub(/('|"|end)\s*gem/m, "\\1\ngem")
         File.open(gem_file, 'w') {|f| f.write(clean_gemfile_content) }
       end
     
