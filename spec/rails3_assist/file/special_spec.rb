@@ -62,6 +62,22 @@ describe Rails3::Assist::File::Special do
       AppDir.new.gem_file.should match /Gemfile/
     end
   end
+
+  describe '#insert_into_routes' do  
+    it 'should insert into block of Routes file' do
+      old_routes_content = AppDir.new.read_routes_file
+
+      routes_stmt = 'devise_for :users'
+
+      CLASS.insert_into_routes routes_stmt
+
+      AppDir.new.read_routes_file.should match /do\s*#{Regexp.escape(routes_stmt)}\s*/
+
+      File.overwrite CLASS.routes_file do
+        old_routes_content
+      end            
+    end
+  end
   
   describe '#read_gem_file' do  
     it 'should read the Gemfile' do

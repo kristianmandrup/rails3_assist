@@ -9,6 +9,7 @@ module Rails3::Assist::File
     end
 
     def insert_application_init place, statement=nil, &block
+      statement = block ? yield : statement
       File.insert_into environment_file, statement, place => /\w+::Application.initialize!/
     end    
   end

@@ -36,6 +36,11 @@ module Rails3::Assist::File
         clean_gemfile_content = read_gem_file.gsub(/('|"|end)\s*gem/m, "\\1\ngem")
         File.open(gem_file, 'w') {|f| f.write(clean_gemfile_content) }
       end
+
+      def insert_into_routes route_stmt=nil, &block
+        statement = block ? yield : route_stmt
+        File.insert_into routes_file, route_stmt, :after => 'Application.routes.draw do'
+      end
     
       # read_application_file
       # append_to_application_file
