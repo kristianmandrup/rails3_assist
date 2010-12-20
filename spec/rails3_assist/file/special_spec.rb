@@ -50,7 +50,7 @@ describe Rails3::Assist::File::Special do
           CLASS.append_to_#{name}_file do
             'hello'
           end
-          content = CLASS.read_#{name}_file          
+          content = CLASS.read_#{name}_file
           content.should match /hello$/
         end
       end
