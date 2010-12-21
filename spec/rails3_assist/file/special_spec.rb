@@ -7,6 +7,26 @@ class AppDir
   use_helper :special
 end
 
+def test_routes_file &block
+  old_content = AppDir.new.read_routes_file
+
+  yield if block
+
+  File.overwrite CLASS.routes_file do
+    old_content
+  end            
+end  
+
+def test_gem_file &block
+  old_content = AppDir.new.read_gem_file
+
+  yield if block
+
+  File.overwrite CLASS.gem_file do
+    old_content
+  end            
+end  
+
 describe Rails3::Assist::File::Special do
   before do
     Rails3::Assist::Directory.rails_root = fixtures_dir     
@@ -63,18 +83,14 @@ describe Rails3::Assist::File::Special do
     end
   end
 
+  # create test_routes macro
+
   describe '#insert_into_routes' do  
     it 'should insert into block of Routes file' do
-      old_routes_content = AppDir.new.read_routes_file
-
-      routes_stmt = 'devise_for :users'
-
-      CLASS.insert_into_routes routes_stmt
-
-      AppDir.new.read_routes_file.should match /do\s*#{Regexp.escape(routes_stmt)}\s*/
-
-      File.overwrite CLASS.routes_file do
-        old_routes_content
+      test_routes_file do
+        routes_stmt = 'devise_for :users'
+        CLASS.insert_into_routes routes_stmt
+        AppDir.new.read_routes_file.should match /do\s*#{Regexp.escape(routes_stmt)}\s*/
       end            
     end
   end
@@ -97,38 +113,26 @@ describe Rails3::Assist::File::Special do
 
   describe '#clean_gemfile' do    
     it 'should be true that it has cleaned the Gemfile ensuring newlines between each gem' do
-      old_gem_file_content = AppDir.new.read_gem_file
+      test_gem_file do
+        CLASS.append_to_gem_file do
+          "gem 'hello'gem 'hi'gem 'blip'"
+        end
 
-      CLASS.append_to_gem_file do
-        "gem 'hello'gem 'hi'gem 'blip'"
-      end
-
-      AppDir.new.clean_gemfile
-
-      expected = "gem 'hello'\ngem 'hi'"
-
-      AppDir.new.read_gem_file.should match /#{Regexp.escape(expected)}/      
-
-      File.overwrite CLASS.gem_file do
-        old_gem_file_content
+        AppDir.new.clean_gemfile
+        expected = "gem 'hello'\ngem 'hi'"
+        AppDir.new.read_gem_file.should match /#{Regexp.escape(expected)}/
       end
     end
 
     it 'should be true that it has cleaned the Gemfile ensuring newlines between each gem and after end' do
-      old_gem_file_content = AppDir.new.read_gem_file
+      test_gem_file do
+        CLASS.append_to_gem_file do
+          "group :dev endgem 'hi'gem 'blip'"
+        end
 
-      CLASS.append_to_gem_file do
-        "group :dev endgem 'hi'gem 'blip'"
-      end
-
-      AppDir.new.clean_gemfile
-
-      expected = "group :dev end\ngem 'hi'"
-
-      AppDir.new.read_gem_file.should match /#{Regexp.escape(expected)}/      
-
-      File.overwrite CLASS.gem_file do
-        old_gem_file_content
+        AppDir.new.clean_gemfile
+        expected = "group :dev end\ngem 'hi'"
+        AppDir.new.read_gem_file.should match /#{Regexp.escape(expected)}/
       end
     end
   end

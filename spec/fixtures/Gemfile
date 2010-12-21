@@ -4,3 +4,6 @@ gem 'cream'
 gem 'devise'
 gem "mm-devise"
 gem "roles_mongo_mapper"
+gem 'hello'
+gem 'hi'
+gem 'blip'
