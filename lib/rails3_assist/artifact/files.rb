@@ -14,7 +14,7 @@ module Rails3::Assist::Artifact
       end
 
       # artifact files using xxx_[artifact].rb convention, i.e postfixing with type of artifact
-      [:mailer, :observer, :permit, :controller, :helper].each do |name|
+      [:mailer, :observer, :permit, :license, :controller, :helper, :validator].each do |name|
         class_eval %{
           def #{name}_files expr=nil
             files = Rails3::Assist::Files.rails_app_files(:#{name.to_s.pluralize}, :pattern => '**/*_#{name}.rb').grep_it expr
@@ -34,7 +34,7 @@ module Rails3::Assist::Artifact
       end
 
 
-      [:erb, :haml].each do |name|
+      [:erb, :haml, :slim].each do |name|
         class_eval %{
           def #{name}_view_files *args 
             view_files args, :template_language => :#{name}

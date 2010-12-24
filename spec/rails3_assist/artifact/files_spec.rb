@@ -8,7 +8,9 @@ class ArtDir
 end
 
 describe Rails3::Assist::Artifact::Files do
-  use_helper :directory
+  extend Rails3::Assist::UseMacro
+
+  use_helpers :directory
 
   before do
     Rails3::Assist::Directory.rails_root = fixtures_dir
@@ -23,19 +25,31 @@ describe Rails3::Assist::Artifact::Files do
 
   describe '#mailer_files' do 
     it "should return :mailer files" do
-      puts @test.mailer_files.file_names.should include 'user_mailer.rb'
+      @test.mailer_files.file_names.should include 'user_mailer.rb'
     end
   end
 
   describe '#observer_files' do 
     it "should return :observer files" do
-      puts @test.observer_files.file_names.should include 'user_observer.rb'
+      @test.observer_files.file_names.should include 'user_observer.rb'
     end
   end
 
   describe '#permit_files' do 
     it "should return :permit files" do
-      puts @test.permit_files.file_names.should include 'user_permit.rb'
+      @test.permit_files.file_names.should include 'user_permit.rb'
+    end
+  end
+
+  describe '#license_files' do 
+    it "should return :license files" do
+      @test.license_files.file_names.should include 'blogging_license.rb'
+    end
+  end
+
+  describe '#validator_files' do 
+    it "should return :validator files" do
+      @test.validator_files.file_names.should include 'email_validator.rb'
     end
   end
    

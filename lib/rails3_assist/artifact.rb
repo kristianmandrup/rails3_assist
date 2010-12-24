@@ -5,7 +5,7 @@ module Rails3::Assist::Artifact
     end
 
     def app_artifacts
-      [:controller, :mailer, :helper, :view, :model, :permit]
+      [:controller, :mailer, :helper, :view, :model, :permit, :license, :validator]
     end
   
     def rails_artifacts
