@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails3_assist}
-  s.version = "0.3.4"
+  s.version = "0.3.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2010-12-20}
+  s.date = %q{2010-12-24}
   s.description = %q{Basic file operation helpers for working with Rails 3 artifacts}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
@@ -53,10 +53,12 @@ Gem::Specification.new do |s|
     "spec/fixtures/app/controllers/users_controller.rb",
     "spec/fixtures/app/helpers/application_helper.rb",
     "spec/fixtures/app/helpers/users_helper.rb",
+    "spec/fixtures/app/licenses/blogging_license.rb",
     "spec/fixtures/app/mailers/user_mailer.rb",
     "spec/fixtures/app/models/user.rb",
     "spec/fixtures/app/models/user_observer.rb",
     "spec/fixtures/app/permits/user_permit.rb",
+    "spec/fixtures/app/validators/email_validator.rb",
     "spec/fixtures/app/views/layouts/application.html.erb",
     "spec/fixtures/app/views/users/_form.html.erb",
     "spec/fixtures/app/views/users/edit.html.erb",
@@ -137,10 +139,12 @@ Gem::Specification.new do |s|
     "spec/fixtures/app/controllers/users_controller.rb",
     "spec/fixtures/app/helpers/application_helper.rb",
     "spec/fixtures/app/helpers/users_helper.rb",
+    "spec/fixtures/app/licenses/blogging_license.rb",
     "spec/fixtures/app/mailers/user_mailer.rb",
     "spec/fixtures/app/models/user.rb",
     "spec/fixtures/app/models/user_observer.rb",
     "spec/fixtures/app/permits/user_permit.rb",
+    "spec/fixtures/app/validators/email_validator.rb",
     "spec/fixtures/config/application.rb",
     "spec/fixtures/config/boot.rb",
     "spec/fixtures/config/environment.rb",
