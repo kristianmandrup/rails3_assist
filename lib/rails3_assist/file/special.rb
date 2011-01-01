@@ -39,7 +39,7 @@ module Rails3::Assist::File
 
       def insert_into_routes route_stmt=nil, &block
         statement = block ? yield : route_stmt
-        File.insert_into routes_file, route_stmt, :after => 'Application.routes.draw do'
+        File.insert_into routes_file, statement, :after => 'Application.routes.draw do'
       end
     
       # read_application_file

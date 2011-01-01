@@ -86,10 +86,20 @@ describe Rails3::Assist::File::Special do
   # create test_routes macro
 
   describe '#insert_into_routes' do  
-    it 'should insert into block of Routes file' do
+    it 'should insert into block of Routes file, string statement' do
       test_routes_file do
         routes_stmt = 'devise_for :users'
         CLASS.insert_into_routes routes_stmt
+        AppDir.new.read_routes_file.should match /do\s*#{Regexp.escape(routes_stmt)}\s*/
+      end            
+    end
+    
+    it 'should insert into block of Routes file, block statement' do
+      test_routes_file do
+        routes_stmt = 'devise_for :brugere'
+        CLASS.insert_into_routes do
+          routes_stmt
+        end
         AppDir.new.read_routes_file.should match /do\s*#{Regexp.escape(routes_stmt)}\s*/
       end            
     end
