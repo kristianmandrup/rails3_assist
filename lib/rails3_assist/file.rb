@@ -1,4 +1,5 @@
 require_all File.dirname(__FILE__) + '/file'
+# require 'sugar-high/file'
 
 module Rails3::Assist
   module File
@@ -31,6 +32,25 @@ module Rails3::Assist
             ::File.overwrite #{name}_file(name) do
               yield
             end
+          end
+
+          def read_#{name} name
+            fname = #{name}_file(name)
+            ::File.read(fname) if ::File.file?(fname)
+          end
+          alias_method :read_#{name}_file, :read_#{name}
+
+          def replace_#{name}_content name, args = {}, &block
+            if !(args.kind_of?(Hash) && args[:where])
+              raise ArgumentError, "#replace_#{name}_content Must take a hash argument with a :where option that is the content to be matched and replaced" 
+            end            
+
+            replace_content = block ? yield : args[:with]
+            if !replace_content            
+              raise ArgumentError, "#replace_#{name}_content Must take a block or a :with hash option that is the content to replace with" 
+            end
+
+            ::File.replace_content_from #{name}_file(name), :where => args[:where], :with => replace_content
           end
 
           def remove_all_#{plural_name}

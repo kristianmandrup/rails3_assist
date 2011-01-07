@@ -30,6 +30,60 @@ describe Rails3::Assist::File do
     end
   end    
 
+  describe '#read_initializer' do
+    it "should create replace initializer content using hash args" do      
+      name = 'my_init'   
+      CLASS.remove_initializers(name)
+      CLASS.create_initializer(name) do
+        'hello'
+      end      
+      CLASS.read_initializer(name).should match /hello/
+    end
+  end
+
+  describe '#read_initializer_file' do
+    it "should create replace initializer content using hash args" do      
+      name = 'my_init'   
+      CLASS.remove_initializers(name)
+      CLASS.create_initializer(name) do
+        'hello'
+      end      
+      CLASS.read_initializer_file(name).should match /hello/
+    end
+  end
+
+
+  describe '#replace_initializer_content' do
+    it "should create replace initializer content using hash args" do      
+      name = 'my_init'   
+      CLASS.remove_initializers(name)
+      CLASS.create_initializer(name) do
+        'hello'
+      end
+      CLASS.replace_initializer_content name, :where => 'hello', :with => 'goodbye'
+      
+      CLASS.read_initializer(name).should match /goodbye/
+      CLASS.read_initializer(name).should_not match /hello/
+    end
+
+    it "should create replace initializer content using hash arg and block" do
+      name = 'my_init'
+      CLASS.remove_initializers(name)      
+      CLASS.create_initializer(name) do
+        'hello'
+      end
+      CLASS.replace_initializer_content name, :where => 'hello' do
+        'goodbye'
+      end
+      
+      CLASS.read_initializer(name).should match /goodbye/
+      CLASS.read_initializer(name).should_not match /hello/
+    end
+  end    
+
+
+  
+
   describe '#create_javascript' do
     it "should create the javascript file 'my_init' " do
       name = :effects
