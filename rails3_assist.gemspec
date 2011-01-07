@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rails3_assist}
-  s.version = "0.3.6"
+  s.version = "0.3.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2011-01-01}
+  s.date = %q{2011-01-07}
   s.description = %q{Basic file operation helpers for working with Rails 3 artifacts}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
