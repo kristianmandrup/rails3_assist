@@ -21,22 +21,26 @@ module Rails3::Assist
             true
           end            
           
-          def #{name}_file name
+          def #{name}_filepath name
             name = (name =~ /.rb$/) ? name : "\#{name}.#{pure_ext}"
             ::File.join(Rails3::Assist::Artifact::Directory.#{name}_dir, name)
+          end  
+
+          def #{name}_file name
+            ::File.new(#{name}_filepath name)
           end  
 
           def create_#{name} name, &block
             dir_name = Rails3::Assist::Artifact::Directory.#{name}_dir
             Rails3::Assist::App.create_empty_tmp :#{name} if !::File.directory?(dir_name)
-            ::File.overwrite #{name}_file(name) do
+            ::File.overwrite #{name}_filepath(name) do
               yield
             end
           end
 
           def read_#{name} name
-            fname = #{name}_file(name)
-            ::File.read(fname) if ::File.file?(fname)
+            file_name = #{name}_filepath(name)
+            ::File.read(file_name) if ::File.file?(file_name)
           end
           alias_method :read_#{name}_file, :read_#{name}
 
@@ -50,7 +54,7 @@ module Rails3::Assist
               raise ArgumentError, "#replace_#{name}_content Must take a block or a :with hash option that is the content to replace with" 
             end
 
-            ::File.replace_content_from #{name}_file(name), :where => args[:where], :with => replace_content
+            ::File.replace_content_from #{name}_filepath(name), :where => args[:where], :with => replace_content
           end
 
           def remove_all_#{plural_name}
@@ -62,7 +66,8 @@ module Rails3::Assist
             return remove_all_#{plural_name} if names.empty? 
             names.to_strings.each do |name|
               name = (name =~ /.rb$/) ? name : "\#{name}.#{pure_ext}"
-              file_name = #{name}_file(name)
+              file_name = #{name}_filepath(name)                 
+              puts "file not there" if !::File.file?(file_name)
               ::File.delete(file_name) if ::File.file?(file_name)
             end
           end

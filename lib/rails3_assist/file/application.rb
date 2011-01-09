@@ -1,4 +1,5 @@
 require 'sugar-high/file'
+require 'sugar-high/file_mutate'
 
 module Rails3::Assist::File
   module Application

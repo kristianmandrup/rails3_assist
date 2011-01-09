@@ -14,9 +14,19 @@ describe Rails3::Assist::File do
     Rails3::Assist::Directory.rails_root = fixtures_dir
   end
 
+  before :each do
+    CLASS.remove_initializer('my_init')    
+  end
+
+  describe '#initializer_filepath' do
+    it "should return the initializer file 'mime_types' " do
+      AppDir.new.initializer_filepath('mime_types').should match /mime_type/
+    end
+  end    
+
   describe '#initializer_file' do
     it "should return the initializer file 'mime_type' " do
-      AppDir.new.initializer_file('mime_type').should match /mime_type/
+      AppDir.new.initializer_file('mime_types').path.should match /mime_type/
     end
   end    
 
@@ -26,25 +36,25 @@ describe Rails3::Assist::File do
       CLASS.create_initializer(name) do
         'hello'
       end
-      CLASS.initializer_file(name).should match /#{name}/
+      CLASS.initializer_file(name).path.should match /#{name}/
+      CLASS.read_initializer(name).should match /hello/
     end
   end    
 
   describe '#read_initializer' do
     it "should create replace initializer content using hash args" do      
       name = 'my_init'   
-      CLASS.remove_initializers(name)
       CLASS.create_initializer(name) do
         'hello'
       end      
       CLASS.read_initializer(name).should match /hello/
+      CLASS.remove_initializer(name)      
     end
   end
 
   describe '#read_initializer_file' do
     it "should create replace initializer content using hash args" do      
       name = 'my_init'   
-      CLASS.remove_initializers(name)
       CLASS.create_initializer(name) do
         'hello'
       end      
@@ -56,7 +66,6 @@ describe Rails3::Assist::File do
   describe '#replace_initializer_content' do
     it "should create replace initializer content using hash args" do      
       name = 'my_init'   
-      CLASS.remove_initializers(name)
       CLASS.create_initializer(name) do
         'hello'
       end
@@ -68,7 +77,6 @@ describe Rails3::Assist::File do
 
     it "should create replace initializer content using hash arg and block" do
       name = 'my_init'
-      CLASS.remove_initializers(name)      
       CLASS.create_initializer(name) do
         'hello'
       end
@@ -81,33 +89,27 @@ describe Rails3::Assist::File do
     end
   end    
 
-
-  
-
   describe '#create_javascript' do
     it "should create the javascript file 'my_init' " do
       name = :effects
       CLASS.create_javascript(name) do
-        'hello'
+        'js stuff'
       end
-      CLASS.javascript_file(name).should match /#{name}/
+      CLASS.read_javascript(name).should match /js stuff/
     end
   end    
 
 
   describe '#remove_initializers' do
-    before do         
+    it "should remove the initializer files named 'my_init' " do
       name = 'my_init' 
       CLASS.create_initializer(name) do
         'hello'
       end
-    end
-    
-    it "should remove the initializer files named 'my_init' " do
-      name = 'my_init'
-      File.exist?(CLASS.initializer_file(name)).should be_true
-      CLASS.remove_initializers(name)
-      File.exist?(CLASS.initializer_file(name)).should be_false
+
+      CLASS.read_initializer(name).should match /hello/
+      CLASS.remove_initializer(name)
+      CLASS.read_initializer(name).should be_nil
     end
   end
 end
